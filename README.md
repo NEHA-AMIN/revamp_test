@@ -1,4 +1,4 @@
-# Propheus Website
+# Website
 
 This is a React website built with TypeScript, Tailwind CSS, and Framer Motion.
 
