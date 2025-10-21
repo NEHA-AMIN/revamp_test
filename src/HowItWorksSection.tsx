@@ -11,21 +11,21 @@ interface TimelineStep {
 const timelineSteps: TimelineStep[] = [
   {
     step: 1,
-    title: 'Ingest & Aggregate',
-    description: 'We continuously pull data from world-class sources like Esri, Overture, and census bureaus, structuring it within the Propheus Core.',
-    imageUrl: 'https://placehold.co/600x300/0f172a/2dd4bf?text=Data+Sources+Flowing+In'
+    title: 'Context tuning',
+    description: 'Align data to your industry, domain, and question (retail demand, site selection, neighborhood enrichment, network planning, etc.).',
+    imageUrl: 'https://placehold.co/600x300/0f172a/2dd4bf?text=Context+Tuning'
   },
   {
     step: 2,
-    title: 'Model & Correlate',
-    description: 'The Propheus Core visualizes AI at work. Our models find hidden patterns, transforming raw data into an intelligent, contextual layer.',
-    imageUrl: 'https://placehold.co/600x300/0f172a/22d3ee?text=Abstract+Neural+Network'
+    title: 'Continuous curation',
+    description: 'Assemble live signals into Walkability, Safety, Neighborhood Vibe, Visit Momentum, and more - ready to plug into models and workflows.',
+    imageUrl: 'https://placehold.co/600x300/0f172a/22d3ee?text=Continuous+Curation'
   },
   {
     step: 3,
-    title: 'Visualize & Act',
-    description: 'The output is a clear visualization—like a predictive heatmap—allowing you to de-risk decisions and act with confidence.',
-    imageUrl: 'https://placehold.co/600x300/0f172a/14b8a6?text=Predictive+Heatmap+UI'
+    title: 'Near Real-Time Freshness',
+    description: 'Keep signals near real-time and freshness-stamped, instead of quarterly snapshots.',
+    imageUrl: 'https://placehold.co/600x300/0f172a/14b8a6?text=Real-Time+Freshness'
   }
 ];
 
@@ -60,8 +60,8 @@ const HowItWorksSection: React.FC = () => {
               Inference Process
             </span>
           </h3>
-          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Transforming disparate data points into strategic assets.
+          <p className="text-lg md:text-xl text-slate-400 max-w-4xl mx-auto leading-relaxed mb-8">
+            Digital Atlas orchestrates agents that continuously ingest, validate, and fuse multimodal signals in a domain-aware way - then convert them into action:
           </p>
         </div>
 
@@ -73,7 +73,7 @@ const HowItWorksSection: React.FC = () => {
             style={{
               scaleY: lineScaleY,
               height: '100%',
-              width: '2px',
+              width: '4px',
               background: 'linear-gradient(to bottom, #2dd4bf, #22d3ee)'
             }}
           />

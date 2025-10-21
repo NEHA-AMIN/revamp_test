@@ -2,12 +2,10 @@ import React from 'react';
 import TealShinyButton from './TealShinyButton';
 
 const HeroSection: React.FC = () => {
-
   return (
-    <section 
+    <section
       className="h-screen w-full relative overflow-hidden bg-black"
     >
-      
       {/* Content Container */}
       <div className="relative z-10 h-full flex flex-col items-start justify-center px-4 sm:px-6 lg:px-8">
         <div className="text-left max-w-4xl">
@@ -26,10 +24,12 @@ const HeroSection: React.FC = () => {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-start items-start">
             {/* Primary CTA - Teal Shiny Button */}
-            <TealShinyButton 
-              text="SEE IN ACTION"
-              aria-label="See in action"
-            />
+            <a href="https://propheus.com/atlas-search" target="_blank" rel="noopener noreferrer">
+              <TealShinyButton 
+                text="SEE IN ACTION"
+                aria-label="See in action"
+              />
+            </a>
             
             {/* Secondary CTA - Updated styling to match premium theme */}
             <a
@@ -37,7 +37,7 @@ const HeroSection: React.FC = () => {
               className="bg-transparent border border-slate-700 hover:border-teal-400 hover:bg-slate-800/50 text-slate-300 hover:text-teal-400 font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-teal-400/10 focus:outline-none focus:ring-4 focus:ring-teal-400/50 focus:ring-offset-2 focus:ring-offset-slate-950"
               aria-label="Learn how our product works - navigate to how it works section"
             >
-              Book a Demo! 
+              Book a Demo!
             </a>
           </div>
         </div>
@@ -47,4 +47,3 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-

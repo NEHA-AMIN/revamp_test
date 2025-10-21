@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CaseStudyCarousel, { CASE_STUDIES } from './CaseStudyCarousel';
 
+
+
 const CaseStudySection: React.FC = () => {
   return (
     <section className="py-16 bg-slate-950 text-white">

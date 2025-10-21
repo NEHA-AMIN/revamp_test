@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -55,14 +56,14 @@ const Navbar: React.FC = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-teal-400/60 to-cyan-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-teal-400 to-cyan-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
             </a>
-            <a
-              href="#industries"
+            <Link
+              to="/industries"
               className="relative text-gray-300 hover:text-white transition-colors duration-200 font-normal text-base group"
             >
               Industries
               <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-teal-400/60 to-cyan-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-teal-400 to-cyan-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
-            </a>
+            </Link>
             <a
               href="#about"
               className="relative text-gray-300 hover:text-white transition-colors duration-200 font-normal text-base group"
@@ -114,9 +115,9 @@ const Navbar: React.FC = () => {
           <a href="#playground" className="block px-4 py-2 text-base text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200">
             Playground
           </a>
-          <a href="#industries" className="block px-4 py-2 text-base text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200">
+          <Link to="/industries" className="block px-4 py-2 text-base text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200">
             Industries
-          </a>
+          </Link>
           <a href="#about" className="block px-4 py-2 text-base text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200">
             About Us
           </a>

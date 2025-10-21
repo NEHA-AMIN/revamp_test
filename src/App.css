@@ -146,3 +146,36 @@ body {
   90% { opacity: 0.8; }
   100% { transform: translateY(0) translateX(0) scale(0.9); opacity: 0.0; }
 }
+
+/* ===== Industries Page Animations ===== */
+@keyframes grid-pan {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 60px 60px, -60px -60px; }
+}
+
+.industries-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 30px 30px, 30px 30px;
+  animation: grid-pan 20s linear infinite;
+}
+
+@keyframes dash {
+  0% { stroke-dasharray: 0 30; stroke-dashoffset: 30; opacity: 0.6; }
+  50% { stroke-dasharray: 30 0; stroke-dashoffset: 15; opacity: 1; }
+  100% { stroke-dasharray: 30 0; stroke-dashoffset: 0; opacity: 0.9; }
+}
+.stream-line {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: dash 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(45,212,191,0.4)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 6px rgba(34,211,238,0.6)); }
+}
+.stream-dot { animation: dotPulse 3.2s ease-in-out infinite; }
