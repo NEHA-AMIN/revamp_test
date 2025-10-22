@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "headers": {
+    "link": "<https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\", <https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\", <https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\", <https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\"",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/about/layout,_N_T_/about/page,_N_T_/about"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/about/__PAGE__",
+    "/about",
+    "/_index"
+  ]
+}
