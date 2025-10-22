@@ -1,0 +1,15 @@
+{
+  "status": 200,
+  "headers": {
+    "link": "</retail.jpeg>; rel=preload; as=\"image\", </CPG.jpeg>; rel=preload; as=\"image\", </property.jpeg>; rel=preload; as=\"image\", </travel.jpeg>; rel=preload; as=\"image\", <https://placehold.co/1200x1200/020617/0f172a?text=Propheus+City+View>; rel=preload; as=\"image\", <https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\", <https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\", <https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face>; rel=preload; as=\"image\"",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/page,_N_T_/,_N_T_/index"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/__PAGE__",
+    "/_index"
+  ]
+}

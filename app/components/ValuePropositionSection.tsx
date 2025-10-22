@@ -73,7 +73,7 @@ const ValuePropositionSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-slate-950">
+    <section className="py-24 sm:py-32 bg-slate-50 dark:bg-slate-950">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div 
@@ -83,10 +83,10 @@ const ValuePropositionSection: React.FC = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-4xl md:text-5xl font-bold text-slate-100 mb-6 leading-tight">
+          <h3 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
             Industry Solutions
           </h3>
-          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-700 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
             Tailored insights and analytics for your industry's unique challenges and opportunities.
           </p>
         </motion.div>

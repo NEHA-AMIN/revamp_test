@@ -1,16 +1,28 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SplitText from './SplitText';
+import { Button } from './ui';
 
 const SignalSection: React.FC = () => {
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    // Check if animation has already played in this session
+    const animated = sessionStorage.getItem('signalAnimated');
+    if (animated === 'true') {
+      setHasAnimated(true);
+    }
+  }, []);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Intentionally no backend hookup here; this is a design-first section.
   };
 
   const handleAnimationComplete = () => {
-    console.log('Headline animation complete!');
+    sessionStorage.setItem('signalAnimated', 'true');
+    setHasAnimated(true);
   };
 
   return (
@@ -47,21 +59,27 @@ const SignalSection: React.FC = () => {
       <div className="relative z-10 container mx-auto px-6">
         <div className="mx-auto text-center max-w-3xl">
           {/* Animated Headline with SplitText */}
-          <SplitText
-            text="If you've come this far, it means you found us..Interesting!"
-            className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 tracking-tight"
-            delay={80}
-            duration={0.8}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-100px"
-            textAlign="center"
-            tag="h4"
-            onLetterAnimationComplete={handleAnimationComplete}
-          />
+          {hasAnimated ? (
+            <h4 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+              If you've come this far, it means you found us..Interesting!
+            </h4>
+          ) : (
+            <SplitText
+              text="If you've come this far, it means you found us..Interesting!"
+              className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 tracking-tight"
+              delay={20}
+              duration={0.4}
+              ease="power2.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+              tag="h4"
+              onLetterAnimationComplete={handleAnimationComplete}
+            />
+          )}
 
           {/* Description */}
           <motion.p
@@ -70,7 +88,7 @@ const SignalSection: React.FC = () => {
             whileInView={{ 
               opacity: 1, 
               y: 0,
-              transition: { duration: 0.6, delay: 1.2, ease: "easeOut" }
+              transition: { duration: 0.4, delay: hasAnimated ? 0 : 0.5, ease: "easeOut" }
             }}
             viewport={{ once: true }}
           >
@@ -87,7 +105,7 @@ const SignalSection: React.FC = () => {
             whileInView={{ 
               opacity: 1, 
               y: 0,
-              transition: { duration: 0.6, delay: 1.6, ease: "easeOut" }
+              transition: { duration: 0.4, delay: hasAnimated ? 0 : 0.8, ease: "easeOut" }
             }}
             viewport={{ once: true }}
           >
@@ -99,13 +117,15 @@ const SignalSection: React.FC = () => {
                 className="flex-1 bg-transparent text-slate-900 dark:text-slate-200 placeholder-slate-500 dark:placeholder-slate-500 px-6 py-4 outline-none"
                 required
               />
-              <button
+              <Button
                 type="submit"
-                className="m-1 px-6 py-2 rounded-full font-semibold text-slate-950 bg-gradient-to-r from-primary-400 to-secondary-400 shadow-[0_0_24px_rgba(34,211,238,0.35)] hover:from-primary-300 hover:to-secondary-300 active:scale-[0.99] transition-all"
+                variant="glow"
+                size="md"
+                className="m-1"
                 aria-label="Get The Signal"
               >
                 Get The Signal
-              </button>
+              </Button>
             </div>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-500">No spam. Only the signal.</p>
           </motion.form>

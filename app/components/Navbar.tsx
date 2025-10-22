@@ -44,22 +44,14 @@ const Navbar: React.FC = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center justify-end space-x-12">
-            <a
-              href="#product"
+            <Link
+              href="/solutions"
               className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
             >
-              Product
+              Solutions
               <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400/60 to-secondary-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
-            </a>
-            <a
-              href="#playground"
-              className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
-            >
-              Playground
-              <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400/60 to-secondary-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
-            </a>
+            </Link>
             <Link
               href="/industries"
               className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
@@ -68,14 +60,22 @@ const Navbar: React.FC = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400/60 to-secondary-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
             </Link>
-            <a
-              href="#about"
+            <Link
+              href="/about"
               className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
             >
-              About Us
+              About
               <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400/60 to-secondary-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
-            </a>
+            </Link>
+            <Link
+              href="/contact"
+              className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
+            >
+              Contact
+              <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400/60 to-secondary-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
+            </Link>
           </div>
 
           {/* Theme Toggle & CTA Button - Hidden on mobile */}
@@ -114,18 +114,18 @@ const Navbar: React.FC = () => {
         `}
       >
         <div className="p-4 space-y-4">
-          <a href="#product" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
-            Product
-          </a>
-          <a href="#playground" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
-            Playground
-          </a>
+          <Link href="/solutions" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+            Solutions
+          </Link>
           <Link href="/industries" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
             Industries
           </Link>
-          <a href="#about" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
-            About Us
-          </a>
+          <Link href="/about" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+            About
+          </Link>
+          <Link href="/contact" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+            Contact
+          </Link>
           <div className="pt-2 border-t border-slate-300 dark:border-slate-700/30">
             <button className="w-full px-4 py-2 text-base text-primary-400 hover:text-primary-300 bg-slate-200 dark:bg-slate-700/30 hover:bg-slate-300 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
               Try Propheus

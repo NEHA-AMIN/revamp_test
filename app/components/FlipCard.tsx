@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Badge } from './ui';
 
 export interface FlipCardProps {
   frontIcon: React.ReactNode;
@@ -42,17 +43,21 @@ export const FlipCard: React.FC<FlipCardProps> = ({
       >
         {/* Front of card */}
         <div className="absolute w-full h-full backface-hidden">
-          <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 rounded-2xl p-8 h-full flex flex-col items-center shadow-lg transition-all duration-300 group-hover:border-teal-500/30 group-hover:shadow-teal-500/10">
+          <div className="bg-[#0B0F0E]/90 backdrop-blur-sm border border-slate-800/50 rounded-2xl p-8 h-full flex flex-col shadow-lg transition-all duration-300 group-hover:border-teal-500/30 group-hover:shadow-teal-500/10">
+            <div className="mb-4">
+              <Badge>Solutions</Badge>
+            </div>
             <motion.div
               animate={{ scale: isFlipped ? 0.8 : 1 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
+              className="mb-4"
             >
               {frontIcon}
             </motion.div>
-            <h4 className="text-xl font-semibold text-slate-100 mb-4 text-center transition-colors duration-300 group-hover:text-teal-300">
+            <h4 className="text-xl font-bold text-slate-100 mb-3 text-center transition-colors duration-300 group-hover:text-teal-300 tracking-tight">
               {frontTitle}
             </h4>
-            <p className="text-slate-400 text-center leading-relaxed">
+            <p className="text-slate-300/90 text-sm text-center leading-relaxed">
               {frontDescription}
             </p>
           </div>
@@ -60,8 +65,11 @@ export const FlipCard: React.FC<FlipCardProps> = ({
 
         {/* Back of card */}
         <div className="absolute w-full h-full backface-hidden rotate-y-180">
-          <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 rounded-2xl p-8 h-full shadow-lg transition-all duration-300 group-hover:border-teal-500/30 group-hover:shadow-teal-500/10">
-            <h4 className="text-xl font-semibold text-teal-300 mb-6 text-center">
+          <div className="bg-[#0B0F0E]/90 backdrop-blur-sm border border-teal-800/30 rounded-2xl p-8 h-full shadow-lg transition-all duration-300">
+            <div className="mb-4">
+              <Badge variant="primary">Key Features</Badge>
+            </div>
+            <h4 className="text-xl font-bold text-slate-100 mb-6 tracking-tight">
               {backTitle || frontTitle}
             </h4>
             <ul className="space-y-3">
@@ -71,9 +79,9 @@ export const FlipCard: React.FC<FlipCardProps> = ({
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: isFlipped ? 1 : 0, x: isFlipped ? 0 : -10 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-start text-slate-300"
+                  className="flex items-start text-slate-300/90 text-sm"
                 >
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-teal-400 mt-2 mr-3 shrink-0" />
+                  <span className="inline-block w-2 h-2 rounded-full bg-teal-400/80 mt-1.5 mr-3 shrink-0" />
                   <span className="leading-relaxed">{point}</span>
                 </motion.li>
               ))}

@@ -2,6 +2,7 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
+import { Button, Badge } from './ui';
 
 type UseCase = {
   label: string;
@@ -179,7 +180,7 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
 
   const useCaseItemVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
+    visible: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 24 } },
   };
 
   return (
@@ -211,8 +212,8 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
           <article
             ref={cardRef}
             aria-labelledby={`${id}-title`}
-            className="relative h-full overflow-hidden rounded-2xl bg-[#0B0F0E]/90 backdrop-blur-sm
-                      border border-slate-800/50 shadow-lg
+            className="relative h-full overflow-hidden rounded-2xl bg-slate-100/95 dark:bg-[#0B0F0E]/90 backdrop-blur-sm
+                      border border-slate-300/50 dark:border-slate-800/50 shadow-lg
                       transition-all duration-300"
           >
             {/* Image Section - No glow effects */}
@@ -248,19 +249,27 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
               />
 
               <div className="mb-2 flex items-center relative z-30">
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold tracking-wider text-slate-200 uppercase">Industry</span>
+                <Badge>Industry</Badge>
               </div>
-              <h3 id={`${id}-title`} className="text-slate-100 text-xl font-bold tracking-tight mb-2 relative z-30">
+              <h3 id={`${id}-title`} className="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight mb-2 relative z-30">
                 {title}
               </h3>
-              <p className="text-slate-300/90 text-sm leading-relaxed mb-auto relative z-30">{tagline}</p>
+              <p className="text-slate-700 dark:text-slate-300/90 text-sm leading-relaxed mb-auto relative z-30">{tagline}</p>
               <div className="mt-4 flex items-center justify-between relative z-30">
-                <a href={ctaHref || '#'} className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-white text-xs font-semibold px-4 py-2 shadow-md hover:bg-teal-400 hover:shadow-lg hover:shadow-teal-500/20 focus:outline-none focus:ring-2 focus:ring-teal-400/40 transition-all duration-300">
+                <Button href={ctaHref || '#'} variant="primary" size="sm">
                   Explore use cases
-                </a>
-                <button aria-label="Flip card" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-teal-500/40 text-teal-400 hover:border-teal-400 hover:bg-teal-500/10 focus:outline-none focus:ring-2 focus:ring-teal-400/30 transition-all duration-300" onClick={(e) => { e.stopPropagation(); handleFlip(); }}>
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6v12m6-6H6" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" /></svg>
-                </button>
+                </Button>
+                <Button 
+                  variant="icon" 
+                  size="icon"
+                  aria-label="Flip card"
+                  onClick={(e) => { e.stopPropagation(); handleFlip(); }}
+                  icon={
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 6v12m6-6H6" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" />
+                    </svg>
+                  }
+                />
               </div>
             </div>
           </article>
@@ -274,7 +283,7 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
             transform: 'rotateY(180deg)',
           }}
         >
-          <article className="relative h-full overflow-hidden rounded-2xl bg-[#0B0F0E]/90 backdrop-blur-sm border border-teal-800/30 shadow-lg transition-all duration-300 will-change-transform">
+          <article className="relative h-full overflow-hidden rounded-2xl bg-slate-100/95 dark:bg-[#0B0F0E]/90 backdrop-blur-sm border border-primary-400/30 dark:border-teal-800/30 shadow-lg transition-all duration-300 will-change-transform">
             {/* Typing cursor CSS */}
             <style>{`
               .typing-cursor::after {
@@ -302,14 +311,14 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
             
             <div className="p-6 h-full flex flex-col relative z-20">
               <div className="mb-2 flex items-center">
-                <span className="rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-semibold tracking-wider text-teal-300 uppercase">Use Cases</span>
+                <Badge variant="primary">Use Cases</Badge>
               </div>
-              <h3 className="text-slate-100 text-xl font-bold tracking-tight mb-4">{title}</h3>
+              <h3 className="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight mb-4">{title}</h3>
               
               <div className="flex-grow overflow-auto">
                 {/* MODIFIED: Converted list to a motion.div for sequenced animations */}
                 <motion.div 
-                  className="grid gap-3 text-slate-300/90 text-sm"
+                  className="grid gap-3 text-slate-700 dark:text-slate-300/90 text-sm"
                   variants={useCasesContainerVariants}
                   initial="hidden"
                   animate={flipped ? "visible" : "hidden"}
@@ -333,10 +342,20 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
               </div>
 
               <div className="mt-4 flex items-center justify-between">
-                <a href={ctaHref || '#'} className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-white text-xs font-semibold px-4 py-2 shadow-md hover:bg-teal-400 hover:shadow-lg hover:shadow-teal-500/20 focus:outline-none focus:ring-2 focus:ring-teal-400/40 transition-all duration-300">More Details </a>
-                <button aria-label="Flip card back" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-teal-500/40 text-teal-400 hover:border-teal-400 hover:bg-teal-500/10 focus:outline-none focus:ring-2 focus:ring-teal-400/30 transition-all duration-300" onClick={(e) => { e.stopPropagation(); handleFlip(); }}>
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m7-7l-7 7 7 7" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </button>
+                <Button href={ctaHref || '#'} variant="primary" size="sm">
+                  More Details
+                </Button>
+                <Button 
+                  variant="icon" 
+                  size="icon"
+                  aria-label="Flip card back"
+                  onClick={(e) => { e.stopPropagation(); handleFlip(); }}
+                  icon={
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M19 12H5m7-7l-7 7 7 7" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  }
+                />
               </div>
             </div>
           </article>
@@ -375,12 +394,12 @@ export default function IndustriesSection() {
   };
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-black">
+    <section ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-slate-50 dark:bg-black">
       <div className="container mx-auto px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center mb-16 md:mb-20">
           {/* Animated heading with slide-in effect */}
           <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-100"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100"
             initial={{ opacity: 0, y: -30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
             transition={{ 
@@ -407,7 +426,7 @@ export default function IndustriesSection() {
           
           {/* Animated subtitle with slide-in effect */}
           <motion.p 
-            className="mt-4 text-lg text-slate-300/90"
+            className="mt-4 text-lg text-slate-600 dark:text-slate-300/90"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             transition={{ 

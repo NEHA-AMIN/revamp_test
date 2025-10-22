@@ -319,7 +319,7 @@ const GlowingSemiCircle: React.FC = () => {
   return (
     <div ref={containerRef} className="relative w-full h-[200vh] overflow-hidden my-24">
       <motion.div 
-        className="absolute bottom-0 left-1/2 bg-black rounded-t-full"
+        className="absolute bottom-0 left-1/2 bg-slate-200 dark:bg-black rounded-t-full"
         style={{
           x: "-50%",
           width,
@@ -429,7 +429,7 @@ const AnimatedText: React.FC = () => {
       `}</style>
       
       <div ref={containerRef} className="mt-8 text-center max-w-4xl mx-auto">
-        <div className="text-2xl md:text-3xl font-medium leading-relaxed">
+        <div className="text-2xl md:text-3xl font-medium leading-relaxed text-slate-700 dark:text-slate-100">
           {words.map((word, index) => (
             <span
               key={index}

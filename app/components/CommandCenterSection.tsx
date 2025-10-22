@@ -268,11 +268,11 @@ const CommandCenterSection: React.FC = () => {
   };
 
   return (
-    <section className="py-24 sm:py-32 bg-black">
+    <section className="py-24 sm:py-32 bg-slate-50 dark:bg-black">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <h3 className="text-4xl md:text-5xl font-bold text-slate-100 mb-6 leading-tight">
+          <h3 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
             Your Command Center for{' '}
             <span className="bg-gradient-to-r from-teal-400 to-cyan-400 text-transparent bg-clip-text">
               Real-World Decisions
@@ -297,7 +297,7 @@ const CommandCenterSection: React.FC = () => {
 
           {/* Right Column - Sticky Visual */}
           <div>
-            <div className="sticky top-24 h-[70vh] rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden">
+            <div className="sticky top-24 h-[70vh] rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-200 dark:bg-slate-950 overflow-hidden">
               {/* Base Map */}
               <img
                 src="https://placehold.co/1200x1200/020617/0f172a?text=Propheus+City+View"

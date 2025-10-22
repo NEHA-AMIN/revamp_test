@@ -8,6 +8,7 @@ import TestimonialsSection from './TestimonialsSection';
 import CaseStudySection from './CaseStudySection';
 import ValuePropositionSection from './ValuePropositionSection';
 import SignalSection from './SignalSection';
+import ScrollToTop from './ScrollToTop';
 
 export default function ClientPageWrapper() {
   return (
@@ -20,6 +21,7 @@ export default function ClientPageWrapper() {
       <CaseStudySection />
       <ValuePropositionSection />
       <SignalSection />
+      <ScrollToTop />
     </>
   );
 }

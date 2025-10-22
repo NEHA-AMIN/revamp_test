@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import TealShinyButton from './TealShinyButton';
+import { Button } from './ui';
 
 const HeroSection: React.FC = () => {
   return (
@@ -24,22 +24,28 @@ const HeroSection: React.FC = () => {
           
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-start items-start">
-            {/* Primary CTA - Teal Shiny Button */}
-            <a href="https://propheus.com/atlas-search" target="_blank" rel="noopener noreferrer">
-              <TealShinyButton 
-                text="SEE IN ACTION"
-                aria-label="See in action"
-              />
-            </a>
+            <Button 
+              variant="shiny"
+              size="lg"
+              href="https://propheus.com/atlas-search"
+              icon={
+                <svg className="w-4 h-4 text-white transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              }
+              aria-label="See in action"
+            >
+              See in Action
+            </Button>
             
-            {/* Secondary CTA - Updated styling to match premium theme */}
-            <a
+            <Button 
+              variant="secondary"
+              size="lg"
               href="#how-it-works"
-              className="bg-transparent border border-slate-400 dark:border-slate-700 hover:border-primary-400 hover:bg-slate-200 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:text-primary-400 font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-400/10 focus:outline-none focus:ring-4 focus:ring-primary-400/50 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-offset-slate-950"
               aria-label="Learn how our product works - navigate to how it works section"
             >
               Book a Demo!
-            </a>
+            </Button>
           </div>
         </div>
       </div>
