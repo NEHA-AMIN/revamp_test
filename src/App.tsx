@@ -1,16 +1,16 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './Navbar';
-import HeroSection from './HeroSection';
-import ValuePropositionSection from './ValuePropositionSection';
-import HowItWorksSection from './HowItWorksSection';
-import CommandCenterSection from './CommandCenterSection';
-import IndustriesSection from './IndustriesSection';
-import TestimonialsSection from './TestimonialsSection';
-import CaseStudySection from './CaseStudySection';
-import SignalSection from './SignalSection';
+import Navbar from './components/Navbar';
+import HeroSection from './sections/HeroSection';
+import ValuePropositionSection from './sections/ValuePropositionSection';
+import HowItWorksSection from './sections/HowItWorksSection';
+import CommandCenterSection from './sections/CommandCenterSection';
+import IndustriesSection from './sections/IndustriesSection';
+import TestimonialsSection from './sections/TestimonialsSection';
+import CaseStudySection from './sections/CaseStudySection';
+import SignalSection from './sections/SignalSection';
 import IndustriesPage from './IndustriesPage';
-import './App.css';
+import './styles/App.css';
 
 function Home() {
   return (
