@@ -74,11 +74,19 @@ const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* CTA Button - Hidden on mobile */}
-          <div className="hidden md:flex items-center">
+          {/* CTA Buttons - Hidden on mobile */}
+          <div className="hidden md:flex items-center space-x-12">
             <button className="bg-transparent border border-gray-500 hover:border-gray-400 hover:bg-gray-800/30 text-gray-300 hover:text-white font-normal px-5 py-2 rounded-md transition-all duration-200 text-sm">
               Try Propheus
             </button>
+            <Link 
+              to="/"
+              className="relative text-gray-300 hover:text-white transition-colors duration-200 font-normal text-base group"
+            >
+              Home
+              <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-teal-400/60 to-cyan-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-teal-400 to-cyan-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -121,7 +129,13 @@ const Navbar: React.FC = () => {
           <a href="#about" className="block px-4 py-2 text-base text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200">
             About Us
           </a>
-          <div className="pt-2 border-t border-gray-700/30">
+          <div className="pt-2 border-t border-gray-700/30 space-y-2">
+            <Link 
+              to="/"
+              className="block w-full px-4 py-2 text-base text-gray-300 hover:text-white bg-gray-700/30 hover:bg-gray-700/50 rounded-lg transition-all duration-200 text-center"
+            >
+              Home
+            </Link>
             <button className="w-full px-4 py-2 text-base text-teal-400 hover:text-teal-300 bg-gray-700/30 hover:bg-gray-700/50 rounded-lg transition-all duration-200">
               Try Propheus
             </button>

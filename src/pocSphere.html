@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semi-Circle Scroll Reveal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: black;
+      background: white;
+      overflow-x: hidden;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    /* The section where the animation happens */
+    .reveal-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Semi-circle element */
+    .semi-circle {
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 300px;
+      height: 150px;
+      background: black;
+      border-top-left-radius: 300px;
+      border-top-right-radius: 300px;
+      transition: transform 1.5s ease-in-out;
+      z-index: 1;
+    }
+
+    .semi-circle.expand {
+      transform: translateX(-50%) scale(10);
+    }
+
+    /* Content inside the semi-circle */
+    .content {
+      position: absolute;
+      opacity: 0;
+      color: white;
+      text-align: center;
+      transition: opacity 0.8s ease-in-out 1.2s;
+      z-index: 2;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .content.show {
+      opacity: 1;
+    }
+
+    .content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <section style="background:#f5f5f5">
+    Scroll down to see the reveal 👇
+  </section>
+
+  <section class="reveal-section">
+    <div class="semi-circle" id="semiCircle"></div>
+    <div class="content" id="content">
+      <h1>Welcome to Dezerv</h1>
+      <p>Smart, data-driven investing made simple.</p>
+    </div>
+  </section>
+
+  <section style="background:#f5f5f5">
+    End of demo 🚀
+  </section>
+
+  <script>
+    const semiCircle = document.getElementById("semiCircle");
+    const content = document.getElementById("content");
+
+    const revealSection = document.querySelector(".reveal-section");
+
+    window.addEventListener("scroll", () => {
+      const rect = revealSection.getBoundingClientRect();
+
+      // When section is in viewport
+      if (rect.top < window.innerHeight * 0.75 && rect.bottom > 0) {
+        semiCircle.classList.add("expand");
+        content.classList.add("show");
+      } else {
+        // Remove to reset animation if you scroll away
+        semiCircle.classList.remove("expand");
+        content.classList.remove("show");
+      }
+    });
+  </script>
+</body>
+</html>
