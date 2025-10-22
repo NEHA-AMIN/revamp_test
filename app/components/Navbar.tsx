@@ -61,6 +61,14 @@ const Navbar: React.FC = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
             </Link>
             <Link
+              href="/#how-it-works"
+              className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
+            >
+              How It Works
+              <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-primary-400/60 to-secondary-400/60 group-hover:w-full transition-all duration-300 blur-[3px] shadow-[0_0_8px_rgba(45,212,191,0.5)]" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary-400 to-secondary-400 group-hover:w-full transition-all duration-300 shadow-[0_0_3px_rgba(45,212,191,0.8)]" />
+            </Link>
+            <Link
               href="/about"
               className="relative text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-normal text-base group"
             >
@@ -114,16 +122,19 @@ const Navbar: React.FC = () => {
         `}
       >
         <div className="p-4 space-y-4">
-          <Link href="/solutions" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+          <Link href="/solutions" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
             Solutions
           </Link>
-          <Link href="/industries" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+          <Link href="/industries" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
             Industries
           </Link>
-          <Link href="/about" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+          <Link href="/#how-it-works" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+            How It Works
+          </Link>
+          <Link href="/about" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
             About
           </Link>
-          <Link href="/contact" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200">
+          <Link href="/contact" className="block px-4 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700/50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
             Contact
           </Link>
           <div className="pt-2 border-t border-slate-300 dark:border-slate-700/30">
