@@ -300,87 +300,44 @@ const INDUSTRIES: Record<IndustryKey, IndustryContent> = {
 // Semi-circle component with teal glow and animated text
 const GlowingSemiCircle: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-100px 0px" });
-  
-  // Scroll progress tracking for the container
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
-  
-  // Transform scroll progress to scale and dimensions
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.5], [0.4, 1, 1.8]);
-  const width = useTransform(scrollYProgress, [0, 0.25, 0.5], [300, 800, 1400]);
-  const height = useTransform(scrollYProgress, [0, 0.25, 0.5], [250, 650, 1100]);
-  const glowIntensity = useTransform(scrollYProgress, [0, 0.15, 0.35, 0.5], [0.3, 0.7, 0.9, 1]);
-  const textOpacity = useTransform(scrollYProgress, [0.4, 0.6, 0.8, 1], [0.4, 0.7, 1, 1]);
-  
+
+  const scale = useTransform(scrollYProgress, [0, 0.25, 0.5], [0.8, 1, 1.8]);
+  const width = useTransform(scrollYProgress, [0, 0.25, 0.5], [1000, 1200, 1500]);
+  const height = useTransform(scrollYProgress, [0, 0.3, 0.8], [1050, 1300, 3800]);
+  const glowIntensity = useTransform(scrollYProgress, [0, 0.15, 0.35, 0.5], [0.5, 0.7, 0.9, 1]);
+
   return (
-    <div ref={containerRef} className="relative w-full h-[200vh] overflow-hidden my-24">
-      <motion.div 
+    <div
+      ref={containerRef}
+      className="relative w-full h-[240vh] overflow-hidden z-[9999] will-change-transform"
+    >
+      <motion.div
         className="absolute bottom-0 left-1/2 bg-black rounded-t-full"
-        style={{
-          x: "-50%",
-          width,
-          height,
-          scale
-        }}
+        style={{ x: "-50%", width, height, scale }}
       >
-        <motion.div 
+        <motion.div
           className="absolute inset-0 rounded-t-full"
           style={{
             boxShadow: "0 0 100px 20px rgba(20,184,166,0.4)",
-            opacity: glowIntensity
+            opacity: glowIntensity,
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute inset-0 rounded-t-full"
           style={{
             boxShadow: "0 0 200px 40px rgba(20,184,166,0.2)",
-            opacity: glowIntensity
+            opacity: glowIntensity,
           }}
         />
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        style={{ opacity: textOpacity }}
-      >
-        <motion.h2 
-          className="text-5xl md:text-7xl font-bold text-white tracking-wide mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ 
-            duration: 1.5, 
-            ease: "easeOut",
-            staggerChildren: 0.1,
-            delayChildren: 0.3
-          }}
-        >
-          {Array.from("your industry").map((char, index) => (
-            <motion.span 
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: 0.3 + (index * 0.05),
-                ease: "easeOut" 
-              }}
-              className="inline-block"
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          ))}
-        </motion.h2>
       </motion.div>
     </div>
   );
 };
-
 // Split text animation
 const AnimatedText: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -413,7 +370,7 @@ const AnimatedText: React.FC = () => {
     <>
       <style>{`
         .split-word {
-          position: relative;
+          // position: relative;
           display: inline-block;
           margin-right: 0.25em;
           opacity: 0;
@@ -602,15 +559,23 @@ const SectionHeader: React.FC<{title: string}> = ({ title }) => (
 );
 
 export default function IndustriesPage() {
+  const { scrollY } = useScroll();
+  const fadeOut = useTransform(scrollY, [0, 200, 400], [1, 0.5, 0]);
   return (
     <main className="bg-black text-slate-100">
       <ParticlesBackground />
 
-      <section className="relative isolate overflow-hidden py-24 sm:py-32">
-        <SectionHeader title="One Atlas. Tailored for Every World." />
+      <section className="relative isolate overflow-hidden min-h-screen flex items-center justify-center">
+        <motion.div
+          style={{ opacity: fadeOut }}
+          className="relative z-0 py-24 sm:py-32 text-center"
+        >
+          <SectionHeader title="One Atlas. Tailored for Every World." />
+        </motion.div>
+        <div className="absolute inset-0 z-20 pointer-events-none">
+          <GlowingSemiCircle />
+        </div>
       </section>
-
-      <GlowingSemiCircle />
 
       <IndustriesCardsSection />
     </main>
