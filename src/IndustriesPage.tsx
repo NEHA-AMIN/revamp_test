@@ -77,57 +77,119 @@ const INDUSTRIES: Record<IndustryKey, IndustryContent> = {
 
 const underlineTransition = { type: 'spring', stiffness: 500, damping: 35 };
 
-// Individual animated line component
-const AnimatedLine: React.FC<{ children: string; index: number; totalLines: number; scrollYProgress: any }> = ({ 
-  children, index, totalLines, scrollYProgress 
-}) => {
-  const start = index / totalLines;
-  const end = (index + 1) / totalLines;
+// Semi-circle component with teal glow and animated text
+const GlowingSemiCircle: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: false, margin: "-100px 0px" });
   
-  const opacity = useTransform(
-    scrollYProgress,
-    [start, end],
-    [0.4, 1]
-  );
-
   return (
-    <motion.p
-      style={{ opacity }}
-      className="text-2xl md:text-3xl font-medium leading-relaxed mb-2"
-    >
-      {children}
-    </motion.p>
+    <div ref={containerRef} className="relative w-full h-96 overflow-hidden my-24">
+      {/* Black semi-circle with teal glow */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[800px] h-[400px] bg-black rounded-t-full">
+        <div className="absolute inset-0 rounded-t-full shadow-[0_0_100px_20px_rgba(20,184,166,0.4)] opacity-70"></div>
+      </div>
+      
+      {/* Animated text */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        <motion.h2 
+          className="text-5xl md:text-7xl font-bold text-white tracking-wide"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ 
+            duration: 1.5, 
+            ease: "easeOut",
+            staggerChildren: 0.1,
+            delayChildren: 0.3
+          }}
+        >
+          {Array.from("your industry").map((char, index) => (
+            <motion.span 
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.3 + (index * 0.05),
+                ease: "easeOut" 
+              }}
+              className="inline-block"
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
+        </motion.h2>
+      </motion.div>
+    </div>
   );
 };
 
-// Animated text component for scroll-triggered line-by-line animation
+// Split text animation without Framer Motion
 const AnimatedText: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.8", "end 0.2"]
-  });
+  const [isVisible, setIsVisible] = useState(false);
 
-  const lines = [
-    "The challenges of the physical world are unique to every industry.",
-    "Propheus provides a single source of truth, finely tuned to deliver",
-    "the specific intelligence your sector demands.",
-    "Explore your solution below."
-  ];
+  const fullText = "The challenges of the physical world are unique to every industry. Propheus provides a single source of truth, finely tuned to deliver the specific intelligence your sector demands. Explore your solution below.";
+  const words = fullText.split(' ');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '-100px 0px'
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div ref={containerRef} className="mt-8 text-center max-w-4xl mx-auto">
-      {lines.map((line, index) => (
-        <AnimatedLine
-          key={index}
-          index={index}
-          totalLines={lines.length}
-          scrollYProgress={scrollYProgress}
-        >
-          {line}
-        </AnimatedLine>
-      ))}
-    </div>
+    <>
+      <style >{`
+        .split-word {
+          position: relative;
+          display: inline-block;
+          margin-right: 0.25em;
+          opacity: 0;
+          transform: translate3d(0, 100px, 0) scale(0.8);
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .split-word.animate {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      `}</style>
+      
+      <div ref={containerRef} className="mt-8 text-center max-w-4xl mx-auto">
+        <div className="text-2xl md:text-3xl font-medium leading-relaxed">
+          {words.map((word, index) => (
+            <span
+              key={index}
+              className={`split-word ${isVisible ? 'animate' : ''}`}
+              style={{
+                transitionDelay: `${index * 0.08}s`
+              }}
+            >
+              {word}
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
@@ -244,6 +306,9 @@ export default function IndustriesPage() {
       <section className="relative isolate overflow-hidden py-24 sm:py-32">
         <SectionHeader title="One Atlas. Tailored for Every World." />
       </section>
+
+      {/* Glowing Semi-circle with "your industry" text */}
+      <GlowingSemiCircle />
 
       {/* Industry Cards Section */}
       <IndustryCardsSection />
