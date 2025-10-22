@@ -128,7 +128,7 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
 
     useCases.forEach((useCase, index) => {
       const text = useCase.label;
-      const typingSpeed = 15; // 15ms per character
+      const typingSpeed = 8; // 8ms per character - faster typing
       const lineTypingTime = text.length * typingSpeed;
 
       const startTimeout = setTimeout(() => {

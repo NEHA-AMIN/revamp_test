@@ -100,7 +100,7 @@ const SolutionCard: React.FC<{ solution: Solution; index: number }> = ({ solutio
       onMouseLeave={() => setIsHovered(false)}
       className="relative group"
     >
-      <div className="h-full bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 transition-all duration-300 hover:border-teal-500/50 hover:shadow-xl hover:shadow-teal-500/10">
+      <div className="h-full bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-2xl p-8 transition-all duration-300 hover:border-teal-500/50 hover:shadow-xl hover:shadow-teal-500/10">
         <motion.div
           animate={{ scale: isHovered ? 1.1 : 1 }}
           transition={{ duration: 0.3 }}
@@ -109,11 +109,11 @@ const SolutionCard: React.FC<{ solution: Solution; index: number }> = ({ solutio
           {solution.icon}
         </motion.div>
 
-        <h3 className="text-2xl font-bold text-slate-100 mb-4">
+        <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4">
           {solution.title}
         </h3>
 
-        <p className="text-slate-400 mb-6 leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
           {solution.description}
         </p>
 
@@ -129,7 +129,7 @@ const SolutionCard: React.FC<{ solution: Solution; index: number }> = ({ solutio
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * idx }}
-                className="flex items-start text-sm text-slate-300"
+                className="flex items-start text-sm text-slate-700 dark:text-slate-300"
               >
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-teal-400 mt-2 mr-3 shrink-0" />
                 {feature}
@@ -138,13 +138,13 @@ const SolutionCard: React.FC<{ solution: Solution; index: number }> = ({ solutio
           </ul>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800">
+        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800">
           {solution.metrics.map((metric, idx) => (
             <div key={idx} className="text-center">
               <div className="text-xl font-bold text-teal-400 mb-1">
                 {metric.value}
               </div>
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-slate-600 dark:text-slate-500">
                 {metric.label}
               </div>
             </div>
@@ -165,9 +165,9 @@ const SolutionCard: React.FC<{ solution: Solution; index: number }> = ({ solutio
 
 export default function SolutionsPage() {
   return (
-    <main className="bg-slate-950 text-slate-100 min-h-screen">
+    <main className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
       <section className="relative py-24 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-teal-900/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-teal-500/10 dark:from-teal-900/20 to-transparent" />
         
         <div className="relative z-10 container mx-auto px-6">
           <motion.div
@@ -176,10 +176,10 @@ export default function SolutionsPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-100 mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
               <span className="animated-teal-gradient">Solutions</span> That Transform
             </h1>
-            <p className="text-xl text-slate-400 leading-relaxed">
+            <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
               Discover our suite of AI-powered solutions designed to give you unprecedented insights into the physical world
             </p>
           </motion.div>
@@ -204,10 +204,10 @@ export default function SolutionsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-slate-400 mb-8">
+            <p className="text-xl text-slate-600 dark:text-slate-400 mb-8">
               Let us show you how our solutions can transform your business
             </p>
             <motion.button

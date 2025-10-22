@@ -547,7 +547,7 @@ function IndustryCard({ title, tagline, imageSrc, useCases, ctaHref, className =
         let currentDelay = 350; // Initial delay after flip animation
         useCases.forEach((useCase, index)=>{
             const text = useCase.label;
-            const typingSpeed = 15; // 15ms per character
+            const typingSpeed = 8; // 8ms per character - faster typing
             const lineTypingTime = text.length * typingSpeed;
             const startTimeout = setTimeout(()=>{
                 setCurrentTypingIndex(index);
@@ -2307,7 +2307,7 @@ function TestimonialCard({ testimonial, index }) {
         wide: 'w-[420px] h-[300px]'
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
-        className: `${sizeClasses[testimonial.size]} relative overflow-hidden rounded-2xl bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 shadow-lg`,
+        className: `${sizeClasses[testimonial.size]} relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-800/50 shadow-lg`,
         initial: {
             opacity: 0,
             y: 50,
@@ -2375,7 +2375,7 @@ function TestimonialCard({ testimonial, index }) {
                 className: "relative z-10 p-4 h-full flex flex-col gap-3",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-700 border border-white/8 overflow-hidden flex-shrink-0",
+                        className: "w-12 h-12 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-700 border border-slate-300 dark:border-white/8 overflow-hidden flex-shrink-0",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                             src: testimonial.avatar,
                             alt: testimonial.name,
@@ -2393,7 +2393,7 @@ function TestimonialCard({ testimonial, index }) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex-1",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-slate-200 text-sm leading-snug font-medium",
+                            className: "text-slate-800 dark:text-slate-200 text-sm leading-snug font-medium",
                             children: testimonial.quote
                         }, void 0, false, {
                             fileName: "[project]/app/components/TestimonialGrid.tsx",
@@ -2409,7 +2409,7 @@ function TestimonialCard({ testimonial, index }) {
                         className: "mt-auto",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-slate-200 text-xs font-semibold",
+                                className: "text-slate-900 dark:text-slate-200 text-xs font-semibold",
                                 children: testimonial.name
                             }, void 0, false, {
                                 fileName: "[project]/app/components/TestimonialGrid.tsx",
@@ -2417,7 +2417,7 @@ function TestimonialCard({ testimonial, index }) {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-slate-400 text-xs",
+                                className: "text-slate-600 dark:text-slate-400 text-xs",
                                 children: testimonial.title
                             }, void 0, false, {
                                 fileName: "[project]/app/components/TestimonialGrid.tsx",
@@ -2425,7 +2425,7 @@ function TestimonialCard({ testimonial, index }) {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sky-300 text-xs font-medium uppercase tracking-wider",
+                                className: "text-teal-600 dark:text-sky-300 text-xs font-medium uppercase tracking-wider",
                                 children: testimonial.company
                             }, void 0, false, {
                                 fileName: "[project]/app/components/TestimonialGrid.tsx",
@@ -2582,7 +2582,7 @@ function TestimonialsSection() {
                     className: "mx-auto max-w-3xl text-center",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].h2, {
-                            className: "text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-100 mb-4",
+                            className: "text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-4",
                             initial: {
                                 opacity: 0,
                                 y: -30
@@ -2610,7 +2610,7 @@ function TestimonialsSection() {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].p, {
-                            className: "text-lg text-slate-300/90",
+                            className: "text-lg text-slate-700 dark:text-slate-300/90",
                             initial: {
                                 opacity: 0,
                                 y: -20

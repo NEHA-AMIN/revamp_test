@@ -115,7 +115,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: TestimonialCard;
 
   return (
     <motion.div
-      className={`${sizeClasses[testimonial.size]} relative overflow-hidden rounded-2xl bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 shadow-lg`}
+      className={`${sizeClasses[testimonial.size]} relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200 dark:border-slate-800/50 shadow-lg`}
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ 
@@ -143,7 +143,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: TestimonialCard;
       />
       
       <div className="relative z-10 p-4 h-full flex flex-col gap-3">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-700 border border-white/8 overflow-hidden flex-shrink-0">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-700 border border-slate-300 dark:border-white/8 overflow-hidden flex-shrink-0">
           <img 
             src={testimonial.avatar} 
             alt={testimonial.name}
@@ -152,15 +152,15 @@ function TestimonialCard({ testimonial, index }: { testimonial: TestimonialCard;
         </div>
         
         <div className="flex-1">
-          <p className="text-slate-200 text-sm leading-snug font-medium">
+          <p className="text-slate-800 dark:text-slate-200 text-sm leading-snug font-medium">
             {testimonial.quote}
           </p>
         </div>
         
         <div className="mt-auto">
-          <p className="text-slate-200 text-xs font-semibold">{testimonial.name}</p>
-          <p className="text-slate-400 text-xs">{testimonial.title}</p>
-          <p className="text-sky-300 text-xs font-medium uppercase tracking-wider">{testimonial.company}</p>
+          <p className="text-slate-900 dark:text-slate-200 text-xs font-semibold">{testimonial.name}</p>
+          <p className="text-slate-600 dark:text-slate-400 text-xs">{testimonial.title}</p>
+          <p className="text-teal-600 dark:text-sky-300 text-xs font-medium uppercase tracking-wider">{testimonial.company}</p>
         </div>
       </div>
     </motion.div>
