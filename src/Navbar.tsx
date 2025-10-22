@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-4 left-4 right-4 z-50 bg-gray-800/70 backdrop-blur-md border border-gray-700/30 rounded-xl shadow-lg">
+    <nav className="fixed top-4 left-4 right-4 z-[100] bg-gray-800/70 backdrop-blur-md border border-gray-700/30 rounded-xl shadow-lg">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-end items-center h-16 gap-12">
           {/* Logo Section */}
@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Panel */}
       <div 
         className={`
-          fixed top-[calc(4rem+1px)] right-4 w-64 md:hidden
+          fixed top-[calc(4rem+1px)] right-4 w-64 md:hidden z-[100]
           bg-gray-800/95 backdrop-blur-md
           border border-gray-700/30 rounded-lg shadow-lg
           transform transition-all duration-300 ease-in-out origin-top-right

@@ -13,32 +13,30 @@ interface CaseStudy {
 // Props for the component
 interface CaseStudyCarouselProps {
   caseStudies: CaseStudy[];
-  blurStrength?: number;
   scaleDelta?: number;
   opacityDelta?: number;
   transitionDuration?: number;
-  autoScroll?: boolean;
   autoScrollInterval?: number;
 }
 
 const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
   caseStudies,
-  blurStrength = 6,
   scaleDelta = 0.08,
-  opacityDelta = 0.3,
+  opacityDelta = 0.25,
   transitionDuration = 0.5,
-  autoScroll = true,
-  autoScrollInterval = 5000, // Increased to 5 seconds for better visibility
+  autoScrollInterval = 4000,
 }) => {
-  const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [shouldDisableBlur, setShouldDisableBlur] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const autoScrollTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Check if we're on mobile and monitor performance
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  // Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -47,310 +45,237 @@ const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
     checkMobile();
     window.addEventListener('resize', checkMobile);
     
-    // Performance monitoring
-    let frameCount = 0;
-    let lastTime = performance.now();
-    let frameRate = 60;
-    
-    const checkPerformance = () => {
-      frameCount++;
-      const now = performance.now();
-      
-      if (now - lastTime >= 1000) {
-        frameRate = frameCount;
-        frameCount = 0;
-        lastTime = now;
-        
-        // Disable blur if performance is suffering
-        if (frameRate < 30 && !shouldDisableBlur) {
-          setShouldDisableBlur(true);
-        } else if (frameRate >= 45 && shouldDisableBlur) {
-          setShouldDisableBlur(false);
-        }
-      }
-      
-      requestAnimationFrame(checkPerformance);
-    };
-    
-    const animationFrame = requestAnimationFrame(checkPerformance);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-      cancelAnimationFrame(animationFrame);
-    };
-  }, [shouldDisableBlur]);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  // Handle scroll to update active card
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsPaused(true);
+  };
 
-    const handleScroll = () => {
-      if (!isScrolling) {
-        setIsScrolling(true);
-      }
-      
-      const scrollLeft = carousel.scrollLeft;
-      const carouselWidth = carousel.clientWidth;
-      const cardWidth = carouselWidth * 0.7; // Approximate card width
-      
-      // Calculate which card is most centered
-      const centerPosition = scrollLeft + carouselWidth / 2;
-      const newActiveIndex = Math.round(centerPosition / cardWidth);
-      
-      if (newActiveIndex !== activeIndex && newActiveIndex >= 0 && newActiveIndex < caseStudies.length) {
-        setActiveIndex(newActiveIndex);
-      }
-      
-      // Clear scrolling state after a delay
-      clearTimeout(carousel.dataset.scrollTimeout as unknown as number);
-      const timeout = window.setTimeout(() => {
-        setIsScrolling(false);
-      }, 150);
-      carousel.dataset.scrollTimeout = timeout.toString();
-    };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
 
-    carousel.addEventListener('scroll', handleScroll);
-    return () => {
-      carousel.removeEventListener('scroll', handleScroll);
-      clearTimeout(carousel.dataset.scrollTimeout as unknown as number);
-    };
-  }, [activeIndex, caseStudies.length, isScrolling]);
-
-  // Auto-scroll functionality - Enhanced for reliable automatic scrolling
-  useEffect(() => {
-    const startAutoScroll = () => {
-      if (autoScroll && !isPaused) {
-        // Clear any existing interval first
-        if (autoScrollRef.current) {
-          clearInterval(autoScrollRef.current);
-        }
-        
-        // Set new interval for automatic scrolling
-        autoScrollRef.current = setInterval(() => {
-          const nextIndex = (activeIndex + 1) % caseStudies.length;
-          setActiveIndex(nextIndex);
-          
-          // Force scroll to the next card
-          const carousel = carouselRef.current;
-          if (carousel) {
-            const carouselWidth = carousel.clientWidth;
-            const cardWidth = carouselWidth * 0.7;
-            const scrollPosition = nextIndex * cardWidth;
-            
-            carousel.scrollTo({
-              left: scrollPosition,
-              behavior: 'smooth'
-            });
-          }
-        }, autoScrollInterval);
-      }
-    };
-
-    const stopAutoScroll = () => {
-      if (autoScrollRef.current) {
-        clearInterval(autoScrollRef.current);
-        autoScrollRef.current = null;
-      }
-    };
-
-    // Start auto-scrolling with a small delay to ensure DOM is ready
-    const initTimeout = setTimeout(() => {
-      startAutoScroll();
-    }, 500);
-
-    // Clean up on unmount
-    return () => {
-      clearTimeout(initTimeout);
-      stopAutoScroll();
-    };
-  }, [activeIndex, autoScroll, autoScrollInterval, caseStudies.length, isPaused]);
-
-  // Pause auto-scroll when user interacts with carousel
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    const pauseAutoScroll = () => {
-      setIsPaused(true);
-      // Clear any existing auto-scroll interval
-      if (autoScrollRef.current) {
-        clearInterval(autoScrollRef.current);
-        autoScrollRef.current = null;
-      }
-    };
-    
-    const resumeAutoScroll = () => {
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) {
       setIsPaused(false);
-      // Force a scroll to the next card after resuming
-      setTimeout(() => {
-        const nextIndex = (activeIndex + 1) % caseStudies.length;
-        navigateToCard(nextIndex);
-      }, 500);
-    };
+      return;
+    }
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      // Swipe left = next card
+      navigateToCard((activeIndex + 1) % caseStudies.length);
+    } else if (isRightSwipe) {
+      // Swipe right = previous card
+      navigateToCard(activeIndex === 0 ? caseStudies.length - 1 : activeIndex - 1);
+    } else {
+      // No significant swipe, resume auto-scroll
+      setTimeout(() => setIsPaused(false), 1000);
+    }
+  };
 
-    carousel.addEventListener('mouseenter', pauseAutoScroll);
-    carousel.addEventListener('mouseleave', resumeAutoScroll);
-    carousel.addEventListener('touchstart', pauseAutoScroll);
-    carousel.addEventListener('touchend', resumeAutoScroll);
+  // Auto-scroll functionality - moves right to left (increments index)
+  useEffect(() => {
+    // Clear any existing interval
+    if (autoScrollTimerRef.current) {
+      clearInterval(autoScrollTimerRef.current);
+      autoScrollTimerRef.current = null;
+    }
+    
+    // Only start auto-scroll if not paused
+    if (!isPaused) {
+      autoScrollTimerRef.current = setInterval(() => {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % caseStudies.length);
+      }, autoScrollInterval);
+    }
 
     return () => {
-      carousel.removeEventListener('mouseenter', pauseAutoScroll);
-      carousel.removeEventListener('mouseleave', resumeAutoScroll);
-      carousel.removeEventListener('touchstart', pauseAutoScroll);
-      carousel.removeEventListener('touchend', resumeAutoScroll);
+      if (autoScrollTimerRef.current) {
+        clearInterval(autoScrollTimerRef.current);
+        autoScrollTimerRef.current = null;
+      }
     };
-  }, [activeIndex, caseStudies.length]);
+  }, [isPaused, caseStudies.length, autoScrollInterval]);
+
+  // Navigate to specific card
+  const navigateToCard = (index: number) => {
+    setActiveIndex(index);
+    setIsPaused(true);
+    
+    // Resume auto-scroll after manual navigation
+    if (autoScrollTimerRef.current) {
+      clearInterval(autoScrollTimerRef.current);
+    }
+    setTimeout(() => setIsPaused(false), 3000);
+  };
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         navigateToCard(activeIndex === 0 ? caseStudies.length - 1 : activeIndex - 1);
-        e.preventDefault();
       } else if (e.key === 'ArrowRight') {
-        navigateToCard((activeIndex + 1) % caseStudies.length);
         e.preventDefault();
+        navigateToCard((activeIndex + 1) % caseStudies.length);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeIndex, caseStudies.length]);
-
-  // Scroll to a specific card
-  const navigateToCard = (index: number) => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-    
-    const carouselWidth = carousel.clientWidth;
-    const cardWidth = carouselWidth * 0.7;
-    const scrollPosition = index * cardWidth;
-    
-    carousel.scrollTo({
-      left: scrollPosition,
-      behavior: 'smooth'
-    });
-  };
 
   // Calculate card styles based on distance from active card
   const getCardStyle = (index: number) => {
     const distance = Math.abs(index - activeIndex);
     const scale = 1 - (distance * scaleDelta);
     const opacity = 1 - (distance * opacityDelta);
-    
-    // Only apply blur if not on mobile and performance is good
-    const blur = (!isMobile && !shouldDisableBlur) ? `blur(${distance * blurStrength}px)` : 'none';
+    const blur = distance > 0 ? distance * 3 : 0; // 3px blur per step away from center
     
     return {
-      scale,
-      opacity,
-      filter: blur,
-      zIndex: 100 - distance,
+      scale: Math.max(scale, 0.7),
+      opacity: Math.max(opacity, 0.3),
+      blur: blur,
+      zIndex: 10 - distance, // Reduced from 100 to 10 to stay below navbar (z-100)
     };
   };
 
   return (
-    <div className="relative w-full overflow-hidden py-8">
-      {/* Keyboard navigation indicators */}
-      <div className="hidden md:flex justify-between absolute top-1/2 left-4 right-4 z-50 -translate-y-1/2 pointer-events-none">
+    <div 
+      className="relative w-full overflow-hidden py-4 md:py-8"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Navigation buttons - Hidden on mobile */}
+      <div className="hidden md:flex justify-between absolute top-1/2 left-2 right-2 md:left-4 md:right-4 z-10 -translate-y-1/2 pointer-events-none">
         <button 
-          onClick={() => navigateToCard(Math.max(0, activeIndex - 1))}
-          className="bg-slate-800/80 text-white p-2 rounded-full pointer-events-auto"
+          onClick={() => navigateToCard(activeIndex === 0 ? caseStudies.length - 1 : activeIndex - 1)}
+          className="bg-slate-800/80 hover:bg-slate-700/90 text-white p-2 md:p-3 rounded-full pointer-events-auto transition-all hover:scale-110"
           aria-label="Previous case study"
-          disabled={activeIndex === 0}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
         </button>
         <button 
-          onClick={() => navigateToCard(Math.min(caseStudies.length - 1, activeIndex + 1))}
-          className="bg-slate-800/80 text-white p-2 rounded-full pointer-events-auto"
+          onClick={() => navigateToCard((activeIndex + 1) % caseStudies.length)}
+          className="bg-slate-800/80 hover:bg-slate-700/90 text-white p-2 md:p-3 rounded-full pointer-events-auto transition-all hover:scale-110"
           aria-label="Next case study"
-          disabled={activeIndex === caseStudies.length - 1}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
       </div>
       
-      {/* Carousel container */}
-      <div 
-        ref={carouselRef}
-        className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar py-8 px-4"
-        style={{ 
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}
-        role="region"
-        aria-label="Case studies carousel"
-      >
-        {/* Spacer for centering first card */}
-        <div className="shrink-0" style={{ width: 'calc(50% - 35vh / 2)' }}></div>
-        
-        {/* Case study cards - DUPLICATED for infinite scroll */}
-        {[...caseStudies, ...caseStudies].map((study, index) => (
-          <motion.div
-            key={`${study.id}-${index}`}
-            className="shrink-0 snap-center mx-4 w-[70vw] max-w-[500px] h-[80vh] max-h-[600px]"
-            animate={getCardStyle(index % caseStudies.length)}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 30,
-              duration: transitionDuration,
-              ease: [0.25, 0.1, 0.25, 1], // cubic-bezier for smooth easing
-            }}
-            whileHover={{ scale: (index % caseStudies.length) === activeIndex ? 1.03 : getCardStyle(index % caseStudies.length).scale + 0.02 }}
-            tabIndex={(index % caseStudies.length) === activeIndex ? 0 : -1}
-            role="group"
-            aria-label={`Case study: ${study.title}`}
-            aria-current={(index % caseStudies.length) === activeIndex ? "true" : "false"}
-          >
-            <div 
-              className={`w-full h-full rounded-xl overflow-hidden shadow-lg transition-shadow ${
-                (index % caseStudies.length) === activeIndex ? 'shadow-2xl' : 'shadow-md'
-              }`}
+      {/* Cards container */}
+      <div className="relative flex justify-center items-center min-h-[400px] sm:min-h-[500px] md:min-h-[600px]">
+        {caseStudies.map((study, index) => {
+          // Calculate position offset from center
+          let rawOffset = index - activeIndex;
+          
+          // Wrap around for infinite effect - choose shortest path
+          if (rawOffset > caseStudies.length / 2) {
+            rawOffset -= caseStudies.length;
+          } else if (rawOffset < -caseStudies.length / 2) {
+            rawOffset += caseStudies.length;
+          }
+          
+          const distance = Math.abs(rawOffset);
+          
+          // Don't render cards that are too far away
+          if (distance > 3) {
+            return null;
+          }
+          
+          const scale = 1 - (distance * scaleDelta);
+          const opacity = 1 - (distance * opacityDelta);
+          const blur = distance > 0 ? distance * 3 : 0;
+          const zIndex = 10 - distance;
+          
+          // Card is active if it's at the center
+          const isActive = distance === 0;
+          
+          // Use smaller offset on mobile for tighter spacing
+          const offsetMultiplier = isMobile ? 105 : 110;
+          
+          // Calculate if card should be visible (not during wrap jump)
+          const shouldBeVisible = distance <= 2;
+          
+          return (
+            <motion.div
+              key={study.id}
+              className="absolute w-[85vw] sm:w-[75vw] md:w-[70vw] lg:w-[60vw] max-w-[500px]"
+              animate={{
+                x: `${rawOffset * offsetMultiplier}%`,
+                scale: Math.max(scale, 0.7),
+                opacity: shouldBeVisible ? Math.max(opacity, 0.3) : 0,
+                filter: `blur(${blur}px)`,
+              }}
+              style={{ 
+                zIndex: zIndex,
+                pointerEvents: isActive ? 'auto' : 'none',
+                visibility: shouldBeVisible ? 'visible' : 'hidden',
+              }}
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                scale: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 },
+                filter: { duration: 0.2 },
+              }}
+              whileHover={{ 
+                scale: isActive ? 1.03 : Math.max(scale, 0.7) + 0.02 
+              }}
+              onMouseEnter={() => !isMobile && isActive && setIsPaused(true)}
+              onMouseLeave={() => !isMobile && isActive && setIsPaused(false)}
             >
-              <div className="relative w-full h-full bg-slate-900 text-white">
-                <img 
-                  src={study.imageUrl} 
-                  alt={`${study.title} case study`}
-                  className="w-full h-1/2 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">{study.title}</h3>
-                  <p className="text-slate-300 mb-4">{study.description}</p>
-                  <a 
-                    href={study.link} 
-                    className="inline-block px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition-colors"
-                  >
-                    View Case Study
-                  </a>
+              <div className="w-full rounded-lg md:rounded-xl overflow-hidden shadow-2xl transition-shadow">
+                <div className="relative w-full bg-slate-900 text-white">
+                  <img 
+                    src={study.imageUrl} 
+                    alt={`${study.title} case study`}
+                    className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover"
+                  />
+                  <div className="p-4 sm:p-5 md:p-6">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">{study.title}</h3>
+                    <p className="text-sm sm:text-base text-slate-300 mb-3 md:mb-4 line-clamp-2 sm:line-clamp-3">{study.description}</p>
+                    <a 
+                      href={study.link} 
+                      className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base bg-teal-500 text-white rounded-md hover:bg-teal-600 transition-colors"
+                      tabIndex={isActive ? 0 : -1}
+                    >
+                      View Case Study
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
-        
-        {/* Spacer for centering last card */}
-        <div className="shrink-0" style={{ width: 'calc(50% - 35vh / 2)' }}></div>
+            </motion.div>
+          );
+        })}
       </div>
       
-
-      
-      {/* Accessibility toggle for blur effect */}
-      <div className="flex justify-center mt-4">
-        <button
-          onClick={() => setShouldDisableBlur(!shouldDisableBlur)}
-          className="text-sm text-slate-500 hover:text-slate-700"
-        >
-          {shouldDisableBlur ? "Enable visual effects" : "Disable visual effects"}
-        </button>
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8">
+        {caseStudies.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => navigateToCard(index)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              index === activeIndex 
+                ? 'bg-teal-500 w-8' 
+                : 'bg-slate-600 hover:bg-slate-500'
+            }`}
+            aria-label={`Go to case study ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   );
@@ -401,18 +326,5 @@ export const CASE_STUDIES: CaseStudy[] = [
     link: "#travel-case-study"
   }
 ];
-
-// Add custom CSS to hide scrollbar
-const style = document.createElement('style');
-style.textContent = `
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-`;
-document.head.appendChild(style);
 
 export default CaseStudyCarousel;
