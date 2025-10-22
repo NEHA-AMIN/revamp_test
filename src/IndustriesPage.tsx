@@ -1,5 +1,196 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
+
+// Particles Background Component
+const ParticlesBackground: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>();
+  const particlesRef = useRef<any[]>([]);
+  const timeRef = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    };
+    resizeCanvas();
+
+    // Particle class
+    class Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      baseSize: number;
+      pulseOffset: number;
+
+      constructor() {
+        this.x = Math.random() * (canvas?.width || 0);
+        this.y = Math.random() * (canvas?.height || 0);
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.baseSize = Math.random() * 2 + 1.5; // Base size 1.5-3.5px
+        this.pulseOffset = Math.random() * Math.PI * 2; // Random phase for pulsing
+      }
+
+      update(time: number) {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Wrap around edges
+        if (canvas) {
+          if (this.x < 0) this.x = canvas.width;
+          if (this.x > canvas.width) this.x = 0;
+          if (this.y < 0) this.y = canvas.height;
+          if (this.y > canvas.height) this.y = 0;
+        }
+      }
+
+      draw(time: number) {
+        if (!ctx) return;
+        
+        // Calculate pulsating size
+        const pulseIntensity = 0.4; // How much the particle grows/shrinks
+        const pulseSpeed = 0.002; // Speed of pulsation
+        const pulseFactor = 1 + Math.sin(time * pulseSpeed + this.pulseOffset) * pulseIntensity;
+        const currentSize = this.baseSize * pulseFactor;
+        
+        // Calculate pulsating opacity
+        const opacityPulse = 0.3 + Math.sin(time * pulseSpeed * 1.5 + this.pulseOffset) * 0.2;
+        
+        // Draw particle with glow
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+        
+        // Main particle
+        ctx.fillStyle = `rgba(255, 140, 66, ${0.8 + opacityPulse})`;
+        ctx.fill();
+        
+        // Enhanced glow effect
+        ctx.shadowColor = '#ff8c42';
+        ctx.shadowBlur = currentSize * 3;
+        ctx.fill();
+        
+        // Additional outer glow
+        ctx.shadowBlur = currentSize * 6;
+        ctx.shadowColor = 'rgba(255, 140, 66, 0.3)';
+        ctx.fill();
+        
+        // Reset shadow
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    // Create particles
+    const createParticles = () => {
+      const particleCount = 70; // Slightly increased for better network effect
+      particlesRef.current = [];
+      
+      for (let i = 0; i < particleCount; i++) {
+        particlesRef.current.push(new Particle());
+      }
+    };
+
+    // Draw connections between nearby particles
+    const drawConnections = (time: number) => {
+      if (!ctx) return;
+      
+      for (let i = 0; i < particlesRef.current.length; i++) {
+        for (let j = i + 1; j < particlesRef.current.length; j++) {
+          const dx = particlesRef.current[i].x - particlesRef.current[j].x;
+          const dy = particlesRef.current[i].y - particlesRef.current[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 150) {
+            // Enhanced connection visibility
+            const baseOpacity = (150 - distance) / 150;
+            const pulseEffect = 0.4 + Math.sin(time * 0.001 + distance * 0.01) * 0.3;
+            const finalOpacity = baseOpacity * pulseEffect * 0.7; // Increased from 0.3 to 0.7
+            
+            ctx.beginPath();
+            ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
+            ctx.lineTo(particlesRef.current[j].x, particlesRef.current[j].y);
+            
+            // Gradient line for better visual appeal
+            const gradient = ctx.createLinearGradient(
+              particlesRef.current[i].x, particlesRef.current[i].y,
+              particlesRef.current[j].x, particlesRef.current[j].y
+            );
+            gradient.addColorStop(0, `rgba(255, 140, 66, ${finalOpacity})`);
+            gradient.addColorStop(0.5, `rgba(255, 200, 100, ${finalOpacity * 1.2})`);
+            gradient.addColorStop(1, `rgba(255, 140, 66, ${finalOpacity})`);
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1.2; // Increased from 0.5 to 1.2
+            ctx.stroke();
+            
+            // Add subtle glow to connections
+            ctx.shadowColor = '#ff8c42';
+            ctx.shadowBlur = 2;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        }
+      }
+    };
+
+    // Animation loop
+    const animate = () => {
+      if (!ctx || !canvas) return;
+      
+      timeRef.current += 16; // Approximate 60fps timing
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Update and draw particles
+      particlesRef.current.forEach(particle => {
+        particle.update(timeRef.current);
+        particle.draw(timeRef.current);
+      });
+      
+      // Draw enhanced connections
+      drawConnections(timeRef.current);
+      
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    createParticles();
+    animate();
+
+    // Handle resize
+    const handleResize = () => {
+      resizeCanvas();
+      createParticles();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+      style={{ background: 'transparent' }}
+    />
+  );
+};
 
 type IndustryKey = 'retail' | 'cpg' | 'o2o' | 'travel' | 'fintech' | 'realestate';
 
@@ -106,8 +297,6 @@ const INDUSTRIES: Record<IndustryKey, IndustryContent> = {
   },
 };
 
-const underlineTransition = { type: 'spring', stiffness: 500, damping: 35 };
-
 // Semi-circle component with teal glow and animated text
 const GlowingSemiCircle: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -128,7 +317,6 @@ const GlowingSemiCircle: React.FC = () => {
   
   return (
     <div ref={containerRef} className="relative w-full h-[200vh] overflow-hidden my-24">
-      {/* Expanding black semi-circle with teal glow */}
       <motion.div 
         className="absolute bottom-0 left-1/2 bg-black rounded-t-full"
         style={{
@@ -154,7 +342,6 @@ const GlowingSemiCircle: React.FC = () => {
         />
       </motion.div>
       
-      {/* Animated text */}
       <motion.div 
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10"
         initial={{ opacity: 0 }}
@@ -194,7 +381,7 @@ const GlowingSemiCircle: React.FC = () => {
   );
 };
 
-// Split text animation without Framer Motion
+// Split text animation
 const AnimatedText: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -298,12 +485,9 @@ const IndustryCard: React.FC<{ industry: IndustryContent; industryKey: IndustryK
         minHeight: isExpanded ? 'auto' : '420px'
       }}
     >
-      {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-black bg-opacity-50 rounded-[20px]"></div>
       
-      {/* Content Container */}
       <div className="relative z-10 p-6 text-white h-full flex flex-col">
-        {/* Top Section - Always Visible */}
         <div className="flex-1 flex flex-col justify-end mt-16">
           <div className="mb-6">
             <h3 className="text-2xl font-bold text-white mb-3 leading-tight">
@@ -314,7 +498,6 @@ const IndustryCard: React.FC<{ industry: IndustryContent; industryKey: IndustryK
               {industry.description}
             </p>
             
-            {/* Industry tag badges (decorative) */}
             <div className="flex gap-2 mb-6">
               <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full px-3 py-1.5">
                 <div className="flex items-center gap-1">
@@ -356,7 +539,6 @@ const IndustryCard: React.FC<{ industry: IndustryContent; industryKey: IndustryK
           </button>
         </div>
 
-        {/* Expandable Section */}
         <motion.div
           initial={false}
           animate={{
@@ -396,7 +578,6 @@ const IndustriesCardsSection: React.FC = () => {
   return (
     <section className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Responsive Grid: 3 columns on desktop, 2 on tablet, 1 on mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
           {industriesArray.map(([key, industry]) => (
             <IndustryCard
@@ -423,15 +604,14 @@ const SectionHeader: React.FC<{title: string}> = ({ title }) => (
 export default function IndustriesPage() {
   return (
     <main className="bg-black text-slate-100">
-      {/* Hero Section */}
+      <ParticlesBackground />
+
       <section className="relative isolate overflow-hidden py-24 sm:py-32">
         <SectionHeader title="One Atlas. Tailored for Every World." />
       </section>
 
-      {/* Glowing Semi-circle with "your industry" text */}
       <GlowingSemiCircle />
 
-      {/* Industries Cards Grid Section */}
       <IndustriesCardsSection />
     </main>
   );
