@@ -1,7 +1,7 @@
 'use client';
 import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
-import CTASection from './CTASection';
+import GlowRing from './GlowRing';
 
 // Particles Background Component
 const ParticlesBackground: React.FC = () => {
@@ -616,7 +616,70 @@ export default function IndustriesPage() {
 
       <IndustriesCardsSection />
       
-      <CTASection />
+      {/* CTA Section with GlowRing */}
+      <section className="relative flex items-center justify-center bg-slate-50 dark:bg-black overflow-hidden py-12">
+        {/* GlowRing as background - absolute positioned behind everything */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+          <GlowRing ctaText="" ctaHref="" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-6"
+          >
+            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-teal-500/20 to-teal-600/20 border border-teal-500/30 text-teal-600 dark:text-teal-400">
+              🤖 Physical AI Revolution
+            </span>
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h2
+            className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <span className="bg-gradient-to-r from-teal-500 via-teal-400 to-teal-600 bg-clip-text text-transparent">
+              Ready to Revolutionize
+            </span>
+            <br />
+            <span className="text-slate-900 dark:text-white">Your Industry?</span>
+          </motion.h2>
+
+          {/* Subtitle */}
+          <motion.p
+            className="text-lg md:text-xl text-slate-700 dark:text-slate-300 mb-6 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Experience the future where AI transcends screens and transforms reality.
+            See Propheus Physical AI solutions in action.
+          </motion.p>
+
+          {/* CTA Button - right below text */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <a
+              href="/contact"
+              className="inline-block px-10 py-3.5 text-lg font-bold bg-teal-500/15 dark:bg-teal-500/15 border-2 border-teal-400/60 dark:border-teal-400/70 text-teal-600 dark:text-teal-200 hover:bg-teal-500/25 hover:border-teal-300 backdrop-blur-md shadow-[0_0_40px_rgba(20,184,166,0.5),0_0_80px_rgba(20,184,166,0.3)] hover:shadow-[0_0_60px_rgba(20,184,166,0.7),0_0_120px_rgba(20,184,166,0.4)] transition-all duration-300 rounded-xl"
+            >
+              Book a Demo!
+            </a>
+          </motion.div>
+        </div>
+      </section>
     </main>
   );
 }

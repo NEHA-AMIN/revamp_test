@@ -14,7 +14,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
 'use client';
 ;
-const ThemeContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(undefined);
+// Create context with a default value to prevent SSR issues
+const ThemeContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])({
+    theme: 'dark',
+    toggleTheme: ()=>{}
+});
 function ThemeProvider({ children }) {
     _s();
     const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('dark');
@@ -49,7 +53,6 @@ function ThemeProvider({ children }) {
     const toggleTheme = ()=>{
         setTheme((prev)=>prev === 'dark' ? 'light' : 'dark');
     };
-    // Always provide context, even before mount to prevent errors
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ThemeContext.Provider, {
         value: {
             theme,
@@ -58,7 +61,7 @@ function ThemeProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/app/providers/ThemeProvider.tsx",
-        lineNumber: 46,
+        lineNumber: 49,
         columnNumber: 5
     }, this);
 }
@@ -66,16 +69,9 @@ _s(ThemeProvider, "TYAL0cX8zabvZV1Dr1hQyVjLqVw=");
 _c = ThemeProvider;
 function useTheme() {
     _s1();
-    const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(ThemeContext);
-    if (context === undefined) {
-        // Return fallback for SSR
-        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-        ;
-        throw new Error('useTheme must be used within a ThemeProvider');
-    }
-    return context;
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(ThemeContext);
 }
-_s1(useTheme, "b9L3QQ+jgeyIrH0NfHrJ8nn7VMU=");
+_s1(useTheme, "gDsCjeeItUuvgOWf1v4qoK9RF6k=");
 var _c;
 __turbopack_context__.k.register(_c, "ThemeProvider");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
