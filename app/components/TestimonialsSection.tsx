@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
       <div className="container mx-auto px-4 md:px-6 mb-8">
         <div className="mx-auto max-w-3xl text-center">
           <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-100 mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-4"
             initial={{ opacity: 0, y: -30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
@@ -22,7 +22,7 @@ export default function TestimonialsSection() {
             What Our Clients Say
           </motion.h2>
           <motion.p 
-            className="text-lg text-slate-300/90"
+            className="text-lg text-slate-700 dark:text-slate-300/90"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}

@@ -1,6 +1,7 @@
 'use client';
 import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
+import CTASection from './CTASection';
 
 // Particles Background Component
 const ParticlesBackground: React.FC = () => {
@@ -614,6 +615,7 @@ export default function IndustriesPage() {
       <GlowingSemiCircle />
 
       <IndustriesCardsSection />
+      <CTASection />
     </main>
   );
 }
