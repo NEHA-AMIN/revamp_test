@@ -719,111 +719,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$resourcesData
 ;
 ;
 ;
-const HeroDropdown = ({ label, options, selectedOption, onSelect, isOpen, onToggle })=>{
-    const dropdownRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const handleClickOutside = (event)=>{
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                if (!event.target?.closest('[data-dropdown-button]')) {
-                    onToggle();
-                }
-            }
-        };
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-        return ()=>{
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [
-        isOpen,
-        onToggle
-    ]);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "relative",
-        ref: dropdownRef,
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "inline-block group relative bg-gradient-to-b from-teal-500/20 to-teal-600/10  p-px rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg shadow-teal-500/20  hover:shadow-xl hover:shadow-teal-500/30 transition-shadow duration-300",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    "data-dropdown-button": true,
-                    onClick: onToggle,
-                    className: "rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md  bg-gray-900/80 hover:bg-gray-900/90 border border-teal-500/30 hover:border-teal-400/50 text-white transition-all duration-300 group-hover:-translate-y-0.5  hover:shadow-md hover:shadow-teal-500/20 min-w-[220px] flex items-center justify-between",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "opacity-90 group-hover:opacity-100 transition-opacity capitalize",
-                            children: label
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/ResourcesPage.tsx",
-                            lineNumber: 77,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0)),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                            className: `ml-3 h-5 w-5 transition-all duration-300 text-teal-300 ${isOpen ? 'rotate-180 group-hover:translate-x-0' : 'group-hover:translate-x-1.5'}`,
-                            fill: "none",
-                            stroke: "currentColor",
-                            viewBox: "0 0 24 24",
-                            children: isOpen ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                strokeLinecap: "round",
-                                strokeLinejoin: "round",
-                                strokeWidth: 2,
-                                d: "M19 9l-7 7-7-7"
-                            }, void 0, false, {
-                                fileName: "[project]/app/components/ResourcesPage.tsx",
-                                lineNumber: 89,
-                                columnNumber: 15
-                            }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                strokeLinecap: "round",
-                                strokeLinejoin: "round",
-                                strokeWidth: 2,
-                                d: "M9 5l7 7-7 7"
-                            }, void 0, false, {
-                                fileName: "[project]/app/components/ResourcesPage.tsx",
-                                lineNumber: 91,
-                                columnNumber: 15
-                            }, ("TURBOPACK compile-time value", void 0))
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/ResourcesPage.tsx",
-                            lineNumber: 80,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/app/components/ResourcesPage.tsx",
-                    lineNumber: 69,
-                    columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0))
-            }, void 0, false, {
-                fileName: "[project]/app/components/ResourcesPage.tsx",
-                lineNumber: 64,
-                columnNumber: 7
-            }, ("TURBOPACK compile-time value", void 0)),
-            isOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute top-full left-0 mt-4 w-full bg-gray-900/95 backdrop-blur-md border border-teal-500/30 rounded-2xl shadow-xl shadow-teal-500/20 z-50 overflow-hidden",
-                children: options.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: ()=>{
-                            onSelect(option);
-                            onToggle();
-                        },
-                        className: `w-full px-6 py-4 text-left text-base transition-all duration-200 hover:bg-gray-800/60 hover:shadow-inner ${selectedOption === option ? 'bg-teal-600/20 text-teal-300 border-l-4 border-teal-500' : 'text-gray-200'}`,
-                        children: option
-                    }, option, false, {
-                        fileName: "[project]/app/components/ResourcesPage.tsx",
-                        lineNumber: 101,
-                        columnNumber: 13
-                    }, ("TURBOPACK compile-time value", void 0)))
-            }, void 0, false, {
-                fileName: "[project]/app/components/ResourcesPage.tsx",
-                lineNumber: 99,
-                columnNumber: 9
-            }, ("TURBOPACK compile-time value", void 0))
-        ]
-    }, void 0, true, {
-        fileName: "[project]/app/components/ResourcesPage.tsx",
-        lineNumber: 62,
-        columnNumber: 5
-    }, ("TURBOPACK compile-time value", void 0));
-};
 const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$resourcesData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["resourcesData"].map((r)=>({
         id: r.id,
         title: r.title,
@@ -840,20 +735,6 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
     const { theme, resolvedTheme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$providers$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
     const [isThemeTransitioning, setIsThemeTransitioning] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Dropdown states
-    const [openDropdown, setOpenDropdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [selectedFilters, setSelectedFilters] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
-        'case studies': 'All',
-        'use cases': 'All',
-        'blogs': 'All'
-    });
-    const dropdownOptions = [
-        'All',
-        'Retail',
-        'CPG',
-        'O2O',
-        'Travel'
-    ];
     const [activeCategory, setActiveCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('All');
     // Filter resources based on active category
     const filteredResources = resources.filter((resource)=>{
@@ -873,15 +754,6 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
         window.addEventListener('theme-change', handleThemeChange);
         return ()=>window.removeEventListener('theme-change', handleThemeChange);
     }, []);
-    const handleDropdownToggle = (dropdownName)=>{
-        setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
-    };
-    const handleFilterSelect = (category, option)=>{
-        setSelectedFilters((prev)=>({
-                ...prev,
-                [category]: option
-            }));
-    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "relative min-h-screen bg-black text-white transition-colors duration-300",
         "data-theme": mounted ? resolvedTheme : 'light',
@@ -889,81 +761,16 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$shadcn$2d$io$2f$background$2d$paths$2f$index$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BackgroundPaths"], {
-                        title: "Resources Hub"
-                    }, void 0, false, {
-                        fileName: "[project]/app/components/ResourcesPage.tsx",
-                        lineNumber: 190,
-                        columnNumber: 9
-                    }, ("TURBOPACK compile-time value", void 0)),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "absolute inset-0 flex items-center justify-center z-20",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "container mx-auto px-4 md:px-6 text-center",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "mt-32 flex flex-col sm:flex-row gap-6 justify-center items-center",
-                                    children: Object.keys(selectedFilters).map((category)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(HeroDropdown, {
-                                            label: category,
-                                            options: dropdownOptions,
-                                            selectedOption: selectedFilters[category],
-                                            onSelect: (option)=>handleFilterSelect(category, option),
-                                            isOpen: openDropdown === category,
-                                            onToggle: ()=>handleDropdownToggle(category)
-                                        }, category, false, {
-                                            fileName: "[project]/app/components/ResourcesPage.tsx",
-                                            lineNumber: 198,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0)))
-                                }, void 0, false, {
-                                    fileName: "[project]/app/components/ResourcesPage.tsx",
-                                    lineNumber: 196,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "mt-8 flex flex-wrap gap-2 justify-center",
-                                    children: Object.entries(selectedFilters).map(([category, filter])=>filter !== 'All' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-teal-600/20 text-teal-300 border border-teal-500/30 backdrop-blur-md",
-                                            children: [
-                                                category,
-                                                ": ",
-                                                filter,
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                    onClick: ()=>handleFilterSelect(category, 'All'),
-                                                    className: "ml-3 hover:text-white transition-colors text-lg leading-none",
-                                                    children: "×"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                    lineNumber: 219,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, `${category}-${filter}`, true, {
-                                            fileName: "[project]/app/components/ResourcesPage.tsx",
-                                            lineNumber: 214,
-                                            columnNumber: 19
-                                        }, ("TURBOPACK compile-time value", void 0)))
-                                }, void 0, false, {
-                                    fileName: "[project]/app/components/ResourcesPage.tsx",
-                                    lineNumber: 211,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/components/ResourcesPage.tsx",
-                            lineNumber: 194,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
-                        fileName: "[project]/app/components/ResourcesPage.tsx",
-                        lineNumber: 193,
-                        columnNumber: 9
-                    }, ("TURBOPACK compile-time value", void 0))
-                ]
-            }, void 0, true, {
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$shadcn$2d$io$2f$background$2d$paths$2f$index$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BackgroundPaths"], {
+                    title: "Resources Hub"
+                }, void 0, false, {
+                    fileName: "[project]/app/components/ResourcesPage.tsx",
+                    lineNumber: 73,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0))
+            }, void 0, false, {
                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                lineNumber: 189,
+                lineNumber: 72,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -984,17 +791,17 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: "Featured visual placeholder"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 242,
+                                                lineNumber: 85,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/app/components/ResourcesPage.tsx",
-                                            lineNumber: 241,
+                                            lineNumber: 84,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                                        lineNumber: 240,
+                                        lineNumber: 83,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1005,7 +812,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resources[0]?.category
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 248,
+                                                lineNumber: 91,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1013,7 +820,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resources[0]?.title
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 251,
+                                                lineNumber: 94,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1021,7 +828,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resources[0]?.excerpt
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 254,
+                                                lineNumber: 97,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1029,7 +836,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resources[0]?.date
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 257,
+                                                lineNumber: 100,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1041,19 +848,19 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 260,
+                                                lineNumber: 103,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                                        lineNumber: 247,
+                                        lineNumber: 90,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                lineNumber: 238,
+                                lineNumber: 81,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1072,12 +879,12 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                         children: label
                                     }, label, false, {
                                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                                        lineNumber: 280,
+                                        lineNumber: 123,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                lineNumber: 270,
+                                lineNumber: 113,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1088,7 +895,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                         children: activeCategory === 'All' ? 'All Resources' : activeCategory
                                     }, void 0, false, {
                                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                                        lineNumber: 296,
+                                        lineNumber: 139,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1101,13 +908,13 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                                        lineNumber: 299,
+                                        lineNumber: 142,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                lineNumber: 295,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1120,7 +927,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resource.category
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 310,
+                                                lineNumber: 153,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1128,7 +935,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resource.title
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 313,
+                                                lineNumber: 156,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1136,7 +943,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resource.excerpt
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 316,
+                                                lineNumber: 159,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1144,7 +951,7 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 children: resource.date
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 319,
+                                                lineNumber: 162,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -1158,24 +965,24 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                                lineNumber: 322,
+                                                lineNumber: 165,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, resource.id, true, {
                                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                                        lineNumber: 306,
+                                        lineNumber: 149,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                                lineNumber: 304,
+                                lineNumber: 147,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                        lineNumber: 235,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     footerSlot && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -1185,24 +992,24 @@ const ResourcesPage = ({ resources = __TURBOPACK__imported__module__$5b$project$
                             children: footerSlot
                         }, void 0, false, {
                             fileName: "[project]/app/components/ResourcesPage.tsx",
-                            lineNumber: 338,
+                            lineNumber: 181,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/app/components/ResourcesPage.tsx",
-                        lineNumber: 337,
+                        lineNumber: 180,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/components/ResourcesPage.tsx",
-                lineNumber: 234,
+                lineNumber: 77,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/app/components/ResourcesPage.tsx",
-        lineNumber: 183,
+        lineNumber: 66,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
