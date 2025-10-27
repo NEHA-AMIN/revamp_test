@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BackgroundPaths } from "@/components/ui/shadcn-io/background-paths";
 import { useTheme } from "../providers/ThemeProvider";
+import { resourcesData } from "../../src/data/resourcesData";
 
 export type Resource = {
   id: string;
@@ -119,27 +120,15 @@ const HeroDropdown: React.FC<DropdownProps> = ({
 };
 
 export const ResourcesPage: React.FC<ResourcesPageProps> = ({
-  resources = [
-    {
-      id: "1",
-      title: "From Purchase to Pickup — Seamless",
-      category: "Retail",
-      excerpt:
-        "Automated post‑purchase support, real‑time order insights, and seamless experiences.",
-      date: "July 14, 2025",
-      href: "#",
-      ctaLabel: "Know more",
-    },
-    {
-      id: "2",
-      title: "AI Explained: Foundation Models for Commerce",
-      category: "AI Explained",
-      excerpt: "A practical walkthrough of how foundation models drive outcomes.",
-      date: "June 30, 2025",
-      href: "#",
-      ctaLabel: "Read",
-    },
-  ],
+  resources = resourcesData.map(r => ({
+    id: r.id,
+    title: r.title,
+    category: r.category,
+    excerpt: r.description,
+    date: new Date(r.publishDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+    href: r.url || (r.videoId ? `https://www.youtube.com/watch?v=${r.videoId}` : '#'),
+    ctaLabel: r.type === 'video' ? 'Watch' : 'Read',
+  })),
   footerSlot,
 }) => {
   const { theme, resolvedTheme } = useTheme();
@@ -155,6 +144,13 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
   });
 
   const dropdownOptions = ['All', 'Retail', 'CPG', 'O2O', 'Travel'];
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  // Filter resources based on active category
+  const filteredResources = resources.filter(resource => {
+    if (activeCategory === 'All') return true;
+    return resource.category.toLowerCase().includes(activeCategory.toLowerCase());
+  });
 
   // Handle SSR hydration
   useEffect(() => {
@@ -270,29 +266,68 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
             </div>
           </div>
 
-          {/* Category Filters (kept for additional filtering) */}
-          <div className="flex flex-wrap items-center gap-3 justify-center">
+          {/* Category Filters */}
+          <div className="flex flex-wrap items-center gap-3 justify-center mb-12">
             {[
               "All",
-              "Banking & Financial services",
-              "Retail", 
-              "Insurance",
-              "Education",
-              "Home Services",
-              "Health & Fitness",
-              "Recruitment",
-              "Other",
-            ].map((label, i) => (
+              "AI & Automation",
+              "Best Practices",
+              "Tutorials",
+              "Industry Insights",
+              "Case Studies",
+              "Product Updates",
+            ].map((label) => (
               <button
                 key={label}
+                onClick={() => setActiveCategory(label)}
                 className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-medium border transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                  i === 0
+                  activeCategory === label
                     ? "bg-teal-500 text-white border-teal-500 hover:bg-teal-600 focus:ring-teal-500 shadow-lg"
                     : "bg-gray-900/60 text-gray-200 border-gray-700 hover:bg-gray-800 hover:shadow-md focus:ring-gray-500 backdrop-blur-sm"
                 }`}
               >
                 {label}
               </button>
+            ))}
+          </div>
+
+          {/* Resources Grid */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-white mb-2">
+              {activeCategory === 'All' ? 'All Resources' : activeCategory}
+            </h2>
+            <p className="text-gray-400 mb-8">
+              Showing {filteredResources.length} {filteredResources.length === 1 ? 'resource' : 'resources'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredResources.map((resource) => (
+              <div 
+                key={resource.id}
+                className="rounded-2xl border border-gray-700 bg-gray-900/60 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:bg-gray-900/80 hover:border-teal-500/50 group"
+              >
+                <p className="text-xs font-semibold text-teal-300 mb-2">
+                  {resource.category}
+                </p>
+                <h3 className="text-lg font-semibold text-gray-100 mb-3 group-hover:text-teal-400 transition-colors">
+                  {resource.title}
+                </h3>
+                <p className="text-sm text-gray-300 mb-4 line-clamp-3">
+                  {resource.excerpt}
+                </p>
+                <p className="text-xs text-gray-400 mb-4">
+                  {resource.date}
+                </p>
+                <a
+                  href={resource.href ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 text-sm font-medium shadow-sm transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+                >
+                  {resource.ctaLabel ?? "Read"} →
+                </a>
+              </div>
             ))}
           </div>
         </div>

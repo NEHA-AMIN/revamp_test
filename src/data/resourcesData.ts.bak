@@ -1,0 +1,291 @@
+export interface Resource {
+  id: string;
+  type: 'blog' | 'video' | 'case-study' | 'guide';
+  category: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  url?: string;
+  videoId?: string;
+  readTime?: string;
+  publishDate: string;
+  tags: string[];
+}
+
+export const resourcesData: Resource[] = [
+  // Blog Posts
+  {
+    id: '1',
+    type: 'blog',
+    category: 'AI & Automation',
+    title: 'How AI Agents Transform Customer Support',
+    description: 'Discover how intelligent AI agents can handle customer queries 24/7, reducing response times by 80% while maintaining high satisfaction scores.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/ai-agents-customer-support',
+    readTime: '8 min read',
+    publishDate: '2025-01-15',
+    tags: ['AI', 'Customer Support', 'Automation']
+  },
+  {
+    id: '2',
+    type: 'blog',
+    category: 'Best Practices',
+    title: 'Building Conversational AI: 10 Essential Tips',
+    description: 'Learn the key principles for designing natural, effective conversational experiences that users love.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/conversational-ai-tips',
+    readTime: '6 min read',
+    publishDate: '2025-01-12',
+    tags: ['Best Practices', 'Conversational AI', 'Design']
+  },
+  {
+    id: '3',
+    type: 'video',
+    category: 'Tutorials',
+    title: 'Getting Started with AI Voice Agents',
+    description: 'A complete walkthrough of setting up your first AI voice agent in under 15 minutes.',
+    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    videoId: 'dQw4w9WgXcQ',
+    readTime: '12 min watch',
+    publishDate: '2025-01-10',
+    tags: ['Tutorial', 'Voice AI', 'Getting Started']
+  },
+  {
+    id: '4',
+    type: 'blog',
+    category: 'Industry Insights',
+    title: 'The Future of Insurance with AI',
+    description: 'How leading insurance companies are leveraging AI to streamline claims processing and improve customer experience.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/ai-insurance-future',
+    readTime: '10 min read',
+    publishDate: '2025-01-08',
+    tags: ['Insurance', 'Industry Trends', 'AI']
+  },
+  {
+    id: '5',
+    type: 'case-study',
+    category: 'Case Studies',
+    title: 'How RetailCo Increased Sales by 3x with AI',
+    description: 'A detailed look at how a major retailer implemented AI-powered product recommendations and saw dramatic results.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/case-studies/retailco-success',
+    readTime: '12 min read',
+    publishDate: '2025-01-05',
+    tags: ['Retail', 'Case Study', 'ROI']
+  },
+  {
+    id: '6',
+    type: 'video',
+    category: 'Tutorials',
+    title: 'Advanced AI Agent Configuration',
+    description: 'Deep dive into advanced configuration options for customizing your AI agents behavior and responses.',
+    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    videoId: 'dQw4w9WgXcQ',
+    readTime: '18 min watch',
+    publishDate: '2025-01-03',
+    tags: ['Tutorial', 'Advanced', 'Configuration']
+  },
+  {
+    id: '7',
+    type: 'blog',
+    category: 'AI & Automation',
+    title: 'Automating Lead Qualification at Scale',
+    description: 'How to use AI to automatically qualify and prioritize leads, saving hours of manual work every day.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/lead-qualification-automation',
+    readTime: '7 min read',
+    publishDate: '2024-12-28',
+    tags: ['Lead Generation', 'Automation', 'Sales']
+  },
+  {
+    id: '8',
+    type: 'guide',
+    category: 'Best Practices',
+    title: 'The Complete Guide to AI Voice Technology',
+    description: 'Everything you need to know about implementing voice AI in your business, from basics to advanced strategies.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/guides/voice-ai-complete-guide',
+    readTime: '15 min read',
+    publishDate: '2024-12-25',
+    tags: ['Voice AI', 'Guide', 'Comprehensive']
+  },
+  {
+    id: '9',
+    type: 'blog',
+    category: 'Industry Insights',
+    title: 'Healthcare AI: Privacy and Compliance',
+    description: 'Navigating HIPAA compliance while implementing AI solutions in healthcare settings.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/healthcare-ai-compliance',
+    readTime: '9 min read',
+    publishDate: '2024-12-22',
+    tags: ['Healthcare', 'Compliance', 'Privacy']
+  },
+  {
+    id: '10',
+    type: 'video',
+    category: 'Product Updates',
+    title: 'New Features Q1 2025 Overview',
+    description: 'Explore the latest features and improvements we've released this quarter.',
+    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    videoId: 'dQw4w9WgXcQ',
+    readTime: '8 min watch',
+    publishDate: '2024-12-20',
+    tags: ['Product', 'Updates', 'Features']
+  },
+  {
+    id: '11',
+    type: 'blog',
+    category: 'AI & Automation',
+    title: 'Reducing Support Costs with AI Chatbots',
+    description: 'Real numbers: How businesses are cutting support costs by 60% without sacrificing quality.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/reduce-support-costs',
+    readTime: '6 min read',
+    publishDate: '2024-12-18',
+    tags: ['Cost Reduction', 'Chatbots', 'ROI']
+  },
+  {
+    id: '12',
+    type: 'case-study',
+    category: 'Case Studies',
+    title: 'Education Platform Scales with AI',
+    description: 'How an online education platform handled 10x growth using AI-powered student support.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/case-studies/education-platform',
+    readTime: '11 min read',
+    publishDate: '2024-12-15',
+    tags: ['Education', 'Scaling', 'Case Study']
+  },
+  {
+    id: '13',
+    type: 'video',
+    category: 'Tutorials',
+    title: 'Integrating AI with Your CRM',
+    description: 'Step-by-step guide to connecting your AI agents with Salesforce, HubSpot, and other CRMs.',
+    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    videoId: 'dQw4w9WgXcQ',
+    readTime: '14 min watch',
+    publishDate: '2024-12-12',
+    tags: ['CRM', 'Integration', 'Tutorial']
+  },
+  {
+    id: '14',
+    type: 'blog',
+    category: 'Best Practices',
+    title: 'Writing Effective AI Prompts',
+    description: 'Master the art of prompt engineering to get the best results from your AI agents.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/effective-ai-prompts',
+    readTime: '8 min read',
+    publishDate: '2024-12-10',
+    tags: ['Prompt Engineering', 'Best Practices', 'AI']
+  },
+  {
+    id: '15',
+    type: 'blog',
+    category: 'Industry Insights',
+    title: 'AI in E-commerce: 2025 Trends',
+    description: 'The top AI trends transforming online retail and what they mean for your business.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/ecommerce-ai-trends-2025',
+    readTime: '10 min read',
+    publishDate: '2024-12-08',
+    tags: ['E-commerce', 'Trends', '2025']
+  },
+  {
+    id: '16',
+    type: 'video',
+    category: 'Product Updates',
+    title: 'Multi-language Support Demo',
+    description: 'See how our AI agents seamlessly handle conversations in 50+ languages.',
+    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    videoId: 'dQw4w9WgXcQ',
+    readTime: '6 min watch',
+    publishDate: '2024-12-05',
+    tags: ['Multilingual', 'Demo', 'Product']
+  },
+  {
+    id: '17',
+    type: 'blog',
+    category: 'AI & Automation',
+    title: 'Sentiment Analysis for Better Customer Insights',
+    description: 'How to use AI sentiment analysis to understand customer emotions and improve service.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/sentiment-analysis-insights',
+    readTime: '7 min read',
+    publishDate: '2024-12-03',
+    tags: ['Sentiment Analysis', 'Customer Insights', 'AI']
+  },
+  {
+    id: '18',
+    type: 'case-study',
+    category: 'Case Studies',
+    title: 'Financial Services Firm Automates Compliance',
+    description: 'How a fintech company used AI to automate regulatory compliance checks and reduce risk.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/case-studies/fintech-compliance',
+    readTime: '13 min read',
+    publishDate: '2024-12-01',
+    tags: ['Finance', 'Compliance', 'Automation']
+  },
+  {
+    id: '19',
+    type: 'guide',
+    category: 'Best Practices',
+    title: 'AI Agent Security Best Practices',
+    description: 'Comprehensive guide to securing your AI implementations and protecting customer data.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/guides/ai-security-best-practices',
+    readTime: '12 min read',
+    publishDate: '2024-11-28',
+    tags: ['Security', 'Best Practices', 'Compliance']
+  },
+  {
+    id: '20',
+    type: 'video',
+    category: 'Tutorials',
+    title: 'Building Your First AI Workflow',
+    description: 'Complete beginner tutorial on creating automated workflows with AI agents.',
+    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    videoId: 'dQw4w9WgXcQ',
+    readTime: '16 min watch',
+    publishDate: '2024-11-25',
+    tags: ['Workflow', 'Tutorial', 'Beginner']
+  },
+  {
+    id: '21',
+    type: 'blog',
+    category: 'Industry Insights',
+    title: 'The ROI of Conversational AI',
+    description: 'Calculate the real return on investment from implementing conversational AI in your business.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/conversational-ai-roi',
+    readTime: '9 min read',
+    publishDate: '2024-11-22',
+    tags: ['ROI', 'Business Value', 'Analysis']
+  },
+  {
+    id: '22',
+    type: 'blog',
+    category: 'AI & Automation',
+    title: 'AI-Powered Analytics for Business Growth',
+    description: 'Leverage AI analytics to uncover insights and drive data-driven business decisions.',
+    thumbnail: '/api/placeholder/400/250',
+    url: '/blog/ai-analytics-growth',
+    readTime: '8 min read',
+    publishDate: '2024-11-20',
+    tags: ['Analytics', 'Business Growth', 'AI']
+  }
+];
+
+export const categories = [
+  'All',
+  'AI & Automation',
+  'Best Practices',
+  'Tutorials',
+  'Industry Insights',
+  'Case Studies',
+  'Product Updates'
+];

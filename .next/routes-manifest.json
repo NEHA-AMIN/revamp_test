@@ -89,10 +89,22 @@
       "namedRegex": "^/industries(?:/)?$"
     },
     {
+      "page": "/resources",
+      "regex": "^/resources(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/resources(?:/)?$"
+    },
+    {
       "page": "/solutions",
       "regex": "^/solutions(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/solutions(?:/)?$"
+    },
+    {
+      "page": "/theme-test",
+      "regex": "^/theme\\-test(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/theme\\-test(?:/)?$"
     }
   ],
   "dataRoutes": [],

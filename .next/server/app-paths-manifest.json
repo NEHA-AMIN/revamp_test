@@ -5,5 +5,7 @@
   "/contact/page": "app/contact/page.js",
   "/industries/page": "app/industries/page.js",
   "/page": "app/page.js",
-  "/solutions/page": "app/solutions/page.js"
+  "/resources/page": "app/resources/page.js",
+  "/solutions/page": "app/solutions/page.js",
+  "/theme-test/page": "app/theme-test/page.js"
 }

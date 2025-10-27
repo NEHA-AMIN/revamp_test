@@ -5,5 +5,7 @@
   "/contact/page": "/contact",
   "/industries/page": "/industries",
   "/page": "/",
-  "/solutions/page": "/solutions"
+  "/resources/page": "/resources",
+  "/solutions/page": "/solutions",
+  "/theme-test/page": "/theme-test"
 }
